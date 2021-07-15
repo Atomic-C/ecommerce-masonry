@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ecommerce_masonry.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ecommerce_masonry.Data
 {
@@ -8,5 +9,6 @@ namespace ecommerce_masonry.Data
         {
 
         }
+        public DbSet<Category> Category { get; set; }
     }
 }
