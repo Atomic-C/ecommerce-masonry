@@ -1,7 +1,45 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@model IEnumerable<ecommerce_masonry.Models.Category>;
+
+<div class="container p-3">
+    <div class=" row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Caategory List</h2>
+        </div>
+        <div class="col-6">
+            Create New Category
+        </div>
+    </div>
+    <br />
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+<table class="table table-bordered table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var obj in Model)
+        {
+<tr>
+    <td width="50%">@obj.CategoryName</td>
+    <td width="30%">@obj.DisplayOrder</td>
+    <td></td>
+</tr>
 }
-
-<h1>Index</h1>
-
+    </tbody>
+</table>}
+else
+{
+<p>No category available.</p>}
+</div>
