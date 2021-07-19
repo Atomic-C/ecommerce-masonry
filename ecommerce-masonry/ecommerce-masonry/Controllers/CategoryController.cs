@@ -20,5 +20,12 @@ namespace ecommerce_masonry.Controllers
             IEnumerable<Category> objectList = _db.Category;
             return View(objectList);
         }
+
+        // GET FOR CREATE
+        public IActionResult Create()
+        {
+
+            return View();
+        }
     }
 }
