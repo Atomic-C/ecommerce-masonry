@@ -27,5 +27,14 @@ namespace ecommerce_masonry.Controllers
 
             return View();
         }
+        // POST FOR CREATE
+        [HttpPost] // We define this as a post action method, with this attribute
+        [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
+        public IActionResult Create(Category obj)
+        {
+            _db.Category.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
