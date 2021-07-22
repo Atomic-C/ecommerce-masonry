@@ -11,7 +11,7 @@ namespace ecommerce_masonry.Data
         {
 
         }
-        public DbSet<Category> Category { get; set; }
-        public DbSet<ApplicationType> ApplicationType { get; set; }
+        public DbSet<Category> Category { get; set; } // This property will be pushed to database, here we can set the name we want it to have within the DB
+        public DbSet<ApplicationType> ApplicationType { get; set; } // This property will be pushed to database
     }
 }
