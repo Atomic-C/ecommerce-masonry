@@ -10,10 +10,13 @@ namespace ecommerce_masonry.Controllers
     {
         private readonly ApplicationDbContext _db;
 
-        public CategoryController(ApplicationDbContext db)
+        public CategoryController(ApplicationDbContext db) // We populate the property above using dependency injection
         {
+            // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
             _db = db;
         }
+
+        // More on DI: https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
 
         public IActionResult Index()
         {
