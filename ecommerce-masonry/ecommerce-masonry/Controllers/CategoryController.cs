@@ -20,16 +20,16 @@ namespace ecommerce_masonry.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objectList = _db.Category;
+            IEnumerable<Category> objectList = _db.Category; // Retrieve all categories from database and store on objectList
             return View(objectList);
         }
 
         // GET FOR CREATE
-        public IActionResult Create()
+        public IActionResult Create() // Here we display empty box to enter name and display order for new category to create
         {
-
             return View();
         }
+
         // POST FOR CREATE
         [HttpPost] // We define this as a post action method, with this attribute
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
