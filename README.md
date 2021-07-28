@@ -4,3 +4,5 @@ To improve my skills with .NET Core, I'm renovating my building block skills, an
 Entity Framework .NET Core;
 Mycrosoft SQL server;
 MVC;
+
+KISS;
