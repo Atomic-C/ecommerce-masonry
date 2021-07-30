@@ -35,7 +35,8 @@
                                 <input type="submit" class=" btn btn-info w-100" value="Create" />
                             </div>
                             <div class="col">
-                                <a asp-action="Index" class="btn btn-success">Back</a>
+                                <a asp-controller="category" asp-action="Index" class="btn btn-success">Back</a>
+                                @* If we're using views within same category, asp-controller="category" can be optional'  *@
                             </div>
                         </div>
                     </div>
