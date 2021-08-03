@@ -19,6 +19,10 @@ namespace ecommerce_masonry.Controllers
         public IActionResult Index()
         {
             IEnumerable<TransportCategory> objList = _db.TransportCategory;
+
+            //System.Diagnostics.Debug.WriteLine("Output is: " + objList); // Use this for debug purposes <3
+            // Source: https://www.youtube.com/watch?v=IpGNe3jLxQo&t=84s
+
             return View(objList);
         }
     }

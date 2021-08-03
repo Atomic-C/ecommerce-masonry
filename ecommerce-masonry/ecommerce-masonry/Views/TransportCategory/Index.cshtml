@@ -1,6 +1,48 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<ecommerce_masonry.Models.TransportCategory>
 
-<h1>Index</h1>
+<div class="container p-3">
+    <div class=" row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-right">
+            @*Below is how we access controller and respective action we wish*@
+            <a asp-controller="Category" asp-action="Create" class=" btn btn-primary">
+                @*What controller and what action method?*@
+                Create New Category
+            </a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    @if (Model.Count() > 0) // Here we use @ sign razor syntax to combine c# with html
+    {
+<table class="table table-bordered table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Transport Name
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var obj in Model) // Model is an IEnumerable of list of category
+        {
+<tr>
+    <td width="50%">@obj.Id</td>
+    <td width="30%">@obj.Name</td>
+    <td></td>
+</tr>}
+    </tbody>
+</table>}
+else
+{
+<p>No transport available.</p>}
+</div>
