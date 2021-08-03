@@ -10,8 +10,9 @@ namespace ecommerce_masonry.Controllers
     {
         private readonly ApplicationDbContext _db;
 
-        public ApplicationTypeController(ApplicationDbContext db)
+        public ApplicationTypeController(ApplicationDbContext db) // We populate the property above using dependency injection
         {
+            // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
             _db = db;
         }
 
