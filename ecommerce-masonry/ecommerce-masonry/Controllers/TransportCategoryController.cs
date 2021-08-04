@@ -25,5 +25,11 @@ namespace ecommerce_masonry.Controllers
 
             return View(objList);
         }
+
+        // GET FOR CREATE
+        public IActionResult Create()
+        {
+            return View(); // Here we display empty box to enter name for new transport category to create
+        }
     }
 }
