@@ -31,5 +31,15 @@ namespace ecommerce_masonry.Controllers
         {
             return View(); // Here we display empty box to enter name for new transport category to create
         }
+
+        // POST FOR CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(TransportCategory obj)
+        {
+            _db.TransportCategory.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index"); // RedirectToAction redirects us to the index in this controler, so no need to define the name of the controller here.
+        }
     }
 }
