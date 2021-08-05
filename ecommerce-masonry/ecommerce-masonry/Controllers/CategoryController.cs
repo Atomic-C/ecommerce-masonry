@@ -35,9 +35,14 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult Create(Category obj)
         {
-            _db.Category.Add(obj); // So this adds to the database.
-            _db.SaveChanges(); // But this is what actually saves it?!?
-            return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+            if (ModelState.IsValid)
+            {
+                _db.Category.Add(obj); // So this adds to the database.
+                _db.SaveChanges(); // But this is what actually saves it?!?
+
+                return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+            }
+            return View(obj);
         }
     }
 }
