@@ -33,9 +33,15 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult Create(ApplicationType obj)
         {
-            _db.ApplicationType.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _db.ApplicationType.Add(obj);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+            }
+
+            return View(obj);
         }
     }
 }
