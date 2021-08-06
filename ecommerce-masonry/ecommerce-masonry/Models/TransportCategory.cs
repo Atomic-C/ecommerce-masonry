@@ -6,6 +6,7 @@ namespace ecommerce_masonry.Models
     {
         [Key]
         public int Id { get; set; } // This is a class property and represents a column
+        [Required]
         public string Name { get; set; } // This is a class property and represents a column
 
     }
