@@ -37,14 +37,9 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(TransportCategory obj)
         {
-            if (ModelState.IsValid)
-            {
-                _db.TransportCategory.Add(obj);
-                _db.SaveChanges();
-
-                return RedirectToAction("Index"); // RedirectToAction redirects us to the index in this controler, so no need to define the name of the controller here.
-            }
-            return View(obj);
+            _db.TransportCategory.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index"); // RedirectToAction redirects us to the index in this controler, so no need to define the name of the controller here.
         }
     }
 }

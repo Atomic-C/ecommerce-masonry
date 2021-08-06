@@ -4,7 +4,7 @@
 <form method="post" asp-action="Create">
 
     <div class="border p-3">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="form-group row">
             <h2 class="text-info pl-3"> Add Application Type</h2>
             <div class="row">
@@ -15,7 +15,6 @@
                         </div>
                         <div class="col-8">
                             <input asp-for="CategoryName" class="form-control" />
-                            <span asp-validation-for="CategoryName" class="text-danger"></span>
                         </div>
 
                     </div>
