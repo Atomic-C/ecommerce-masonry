@@ -1,8 +1,8 @@
 ﻿@model ecommerce_masonry.Models.Category
 
 
-<form method="post" asp-action="Edit">
-    @*Form executes post method and looks for post action method of "create"*@
+<form method="post" asp-action="Create">
+    @*Form executes post method and looks for post action method of "Edit"*@
 
     <div class="border p-3">
         @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
@@ -56,6 +56,7 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
 
 }

@@ -42,7 +42,7 @@
         @* So, do we use  asp-route-data="@obj.ID" or asp-route-id="@obj.ID" ???*@
         <div class="w-75 btn-group" role="group">
             @*Below is how we access controller and respective action we wish*@
-            <a asp-controller="Category" asp-route-data="@obj.ID" asp-action="Edit" class=" btn btn-primary mx-2">
+            <a asp-controller="Category" asp-route-id="@obj.ID" asp-action="Edit" class=" btn btn-primary mx-2">
                 @*What controller and what action method?*@
                 Edit
             </a>
@@ -53,7 +53,8 @@
             </a>
         </div>
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>}
 else
