@@ -76,5 +76,13 @@ namespace ecommerce_masonry.Controllers
             }
             return View(obj);
         }
+        /*
+        TODO: GOOGLE
+        SqlException: Cannot insert explicit value for identity column in table 'Category' when IDENTITY_INSERT is set to OFF.
+
+        https://appuals.com/how-to-fix-the-error-cannot-insert-explicit-value-for-identity-column-in-table-when-identity_insert-is-set-to-off/
+
+            https://makolyte.com/sqlexception-cannot-insert-explicit-value-for-identity-column/
+        */
     }
 }
