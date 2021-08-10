@@ -61,5 +61,20 @@ namespace ecommerce_masonry.Controllers
             }
             return View(obj); // If we found the record, pass it to the view so we can display it!!!
         }
+
+        // POST FOR Edit
+        [HttpPost] // We define this as a post action method, with this attribute
+        [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
+        public IActionResult Edit(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Category.Update(obj); // So this Updates the database.
+                _db.SaveChanges(); // But this is what actually saves it?!?
+
+                return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+            }
+            return View(obj);
+        }
     }
 }
