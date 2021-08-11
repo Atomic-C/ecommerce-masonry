@@ -45,7 +45,7 @@ namespace ecommerce_masonry.Controllers
             return View(obj);
         }
 
-        // GET FOR Edit
+        // GET FOR EDIT
         public IActionResult Edit(int? id) // Receive id from asp-route on View Category Index
         {
             if (id == null || id == 0) // Check these invalid conditions, we don't want them
@@ -62,7 +62,7 @@ namespace ecommerce_masonry.Controllers
             return View(obj); // If we found the record, pass it to the view so we can display it!!!
         }
 
-        // POST FOR Edit
+        // POST FOR EDIT
         [HttpPost] // We define this as a post action method, with this attribute
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult Edit(Category obj)
@@ -83,6 +83,42 @@ namespace ecommerce_masonry.Controllers
         https://appuals.com/how-to-fix-the-error-cannot-insert-explicit-value-for-identity-column-in-table-when-identity_insert-is-set-to-off/
 
             https://makolyte.com/sqlexception-cannot-insert-explicit-value-for-identity-column/
+
+        I ended up messing the database a little and had to revert it:
+        https://stackoverflow.com/questions/38192450/how-to-unapply-a-migration-in-asp-net-core-with-ef-core
         */
+
+        // GET FOR DELETE
+        public IActionResult Delete(int? id) // Receive id from asp-route on View Category Index
+        {
+            if (id == null || id == 0) // Check these invalid conditions, we don't want them
+            {
+                return NotFound();
+            }
+
+            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+
+            if (obj == null) // Check this invalid condition, we don't want it. (If not found)
+            {
+                return NotFound();
+            }
+            return View(obj); // If we found the record, pass it to the view so we can display it!!!
+        }
+
+        // POST FOR DELETE
+        [HttpPost] // We define this as a post action method, with this attribute
+        [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Category.Remove(obj); // So this Removes the database.
+            _db.SaveChanges(); // But this is what actually saves it?!?
+
+            return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+        }
     }
 }
