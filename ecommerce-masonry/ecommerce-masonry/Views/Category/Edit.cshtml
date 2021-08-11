@@ -1,7 +1,7 @@
 ﻿@model ecommerce_masonry.Models.Category
 
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Edit">
     <input asp-for="ID" hidden /> @*This solves an error, when we have a complex object in category. Test it.*@
     @*Form executes post method and looks for post action method of "Edit"*@
 
