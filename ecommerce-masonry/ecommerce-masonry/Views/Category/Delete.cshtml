@@ -39,7 +39,7 @@
                             <input type="submit" class=" btn btn-danger w-100" value="Delete" />
                         </div>
                         <div class="col">
-                            <a asp-controller="Category" asp-action="Index" class="btn btn-success">Back</a>
+                            <a asp-controller="Category" asp-action="Index" class="btn btn-success"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
                             @* If we're using views within same category, asp-controller="category" can be optional'  *@
                         </div>
                     </div>
@@ -57,6 +57,7 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
 
 }
