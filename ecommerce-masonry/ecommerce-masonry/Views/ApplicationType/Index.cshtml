@@ -6,8 +6,8 @@
             <h2 class="text-primary">Application Type List</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-action="Create" class=" btn btn-primary">
-                Create New ApplicationType
+            <a asp-controller="ApplicationType" asp-action="Create" class=" btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create New ApplicationType
             </a>
         </div>
     </div>
@@ -40,6 +40,11 @@
             <a asp-controller="ApplicationType" asp-route-id="@obj.ID" asp-action="Edit" class=" btn btn-primary mx-2">
                 @*What controller and what action method?*@
                 <i class="fas fa-edit"></i> &nbsp; Edit
+            </a>
+            @*Below is how we access controller and respective action we wish*@
+            <a asp-controller="ApplicationType" asp-route-id="@obj.ID" asp-action="Delete" class=" btn btn-danger mx-2">
+                @*What controller and what action method?*@
+                <i class="fas fa-trash-alt"></i> &nbsp; Delete
             </a>
         </div>
     </td>

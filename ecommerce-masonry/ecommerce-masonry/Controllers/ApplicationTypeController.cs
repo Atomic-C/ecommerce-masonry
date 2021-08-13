@@ -75,5 +75,38 @@ namespace ecommerce_masonry.Controllers
             }
             return View(obj);
         }
+
+        // GET FOR DELETE
+        public IActionResult Delete(int? id) // Receive id from asp-route on View Category Index
+        {
+            if (id == null || id == 0) // Check these invalid conditions, we don't want them
+            {
+                return NotFound();
+            }
+
+            var obj = _db.ApplicationType.Find(id); // We retrieve category from the database if valid.
+
+            if (obj == null) // Check this invalid condition, we don't want it. (If not found)
+            {
+                return NotFound();
+            }
+            return View(obj); // If we found the record, pass it to the view so we can display it!!!
+        }
+
+        // POST FOR DELETE
+        [HttpPost] // We define this as a post action method, with this attribute
+        [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.ApplicationType.Find(id); // We retrieve category from the database if valid.
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.ApplicationType.Remove(obj); // So this Removes the database.
+            _db.SaveChanges(); // But this is what actually saves it?!?
+
+            return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+        }
     }
 }
