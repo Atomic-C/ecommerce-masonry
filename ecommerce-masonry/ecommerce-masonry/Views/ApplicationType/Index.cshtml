@@ -16,29 +16,37 @@
 
     @if (Model.Count() > 0)
     {
-        <table class="table table-bordered table table-striped" style="width:100%">
-            <thead>
-                <tr>
-                    <th>
-                        Name
-                    </th>
+<table class="table table-bordered table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
 
-                    <th></th>
-                </tr>
+            <th></th>
+        </tr>
 
-            </thead>
-            <tbody>
+    </thead>
+    <tbody>
 
-                @foreach (var obj in Model)
-                {
-                    <tr>
-                        <td width="50%">@obj.CategoryName</td>
-                        <td></td>
-                    </tr>
-                }
-            </tbody>
-        </table>}
-    else
-    {
-        <p>No application type available.</p>}
+        @foreach (var obj in Model)
+        {
+<tr>
+    <td width="50%">@obj.CategoryName</td>
+    <td class="text-center">
+        @* So, do we use  asp-route-data="@obj.ID" or asp-route-id="@obj.ID" ???*@
+        <div class="w-75 btn-group" role="group">
+            @*Below is how we access controller and respective action we wish*@
+            <a asp-controller="ApplicationType" asp-route-id="@obj.ID" asp-action="Edit" class=" btn btn-primary mx-2">
+                @*What controller and what action method?*@
+                <i class="fas fa-edit"></i> &nbsp; Edit
+            </a>
+        </div>
+    </td>
+</tr>}
+    </tbody>
+</table>}
+else
+{
+<p>No application type available.</p>}
 </div>

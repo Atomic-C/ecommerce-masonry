@@ -43,5 +43,37 @@ namespace ecommerce_masonry.Controllers
 
             return View(obj);
         }
+
+        // GET FOR EDIT
+        public IActionResult Edit(int? id) // Receive id from asp-route on View Category Index
+        {
+            if (id == null || id == 0) // Check these invalid conditions, we don't want them
+            {
+                return NotFound();
+            }
+
+            var obj = _db.ApplicationType.Find(id); // We retrieve category from the database if valid.
+
+            if (obj == null) // Check this invalid condition, we don't want it. (If not found)
+            {
+                return NotFound();
+            }
+            return View(obj); // If we found the record, pass it to the view so we can display it!!!
+        }
+
+        // POST FOR EDIT
+        [HttpPost] // We define this as a post action method, with this attribute
+        [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
+        public IActionResult Edit(ApplicationType obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ApplicationType.Update(obj); // So this Updates the database.
+                _db.SaveChanges(); // But this is what actually saves it?!?
+
+                return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
+            }
+            return View(obj);
+        }
     }
 }
