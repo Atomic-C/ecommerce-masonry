@@ -20,7 +20,13 @@ namespace ecommerce_masonry.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objectList = _db.Category; // Retrieve all categories from database and store on objectList
+            IEnumerable<Product> objectList = _db.Product; // Retrieve all categories from database and store on objectList
+
+            foreach (var obj in objectList)
+            {
+                obj.Category = _db.Category.FirstOrDefault(u => u.Id == obj.Category.ID);
+            }
+
             return View(objectList);
         }
 
