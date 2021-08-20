@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ecommerce_masonry.Models.Product>
+
+<div class="container p-3">
+    <div class=" row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Product List</h2>
+        </div>
+        <div class="col-6 text-right">
+            @*Below is how we access controller and respective action we wish*@
+            <a asp-controller="Product" asp-action="Upsert" class=" btn btn-primary">
+                @*What controller and what action method?*@
+                <i class="fas fa-plus"></i> &nbsp; Create New Product
+            </a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    @if (Model.Count() > 0) // Here we use @ sign razor syntax to combine c# with html
+    {
+<table class="table table-bordered table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @foreach (var obj in Model) // Model is an IEnumerable of list of product
+        {
+<tr>
+    <td width="50%">@obj.Name</td>
+    <td width="30%">@obj.Price</td>
+    <td class="text-center">
+        @* So, do we use  asp-route-data="@obj.ID" or asp-route-id="@obj.ID" ???*@
+        <div class="w-75 btn-group" role="group">
+            @*Below is how we access controller and respective action we wish*@
+            <a asp-controller="Product" asp-route-id="@obj.Id" asp-action="Upsert" class=" btn btn-primary mx-2">
+                @*What controller and what action method?*@
+                <i class="fas fa-edit"></i> &nbsp; Edit
+            </a>
+            @*Below is how we access controller and respective action we wish*@
+            <a asp-controller="Product" asp-route-id="@obj.Id" asp-action="Delete" class=" btn btn-danger mx-2">
+                @*What controller and what action method?*@
+                <i class="fas fa-trash-alt"></i> &nbsp; Delete
+            </a>
+        </div>
+    </td>
+</tr>}
+    </tbody>
+</table>}
+else
+{
+<p>No product available.</p>}
+</div>
