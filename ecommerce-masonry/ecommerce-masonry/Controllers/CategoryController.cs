@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace ecommerce_masonry.Controllers
 {
-    public class ProductController : Controller
+    public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public ProductController(ApplicationDbContext db) // We populate the property above using dependency injection
+        public CategoryController(ApplicationDbContext db) // We populate the property above using dependency injection
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
             _db = db;

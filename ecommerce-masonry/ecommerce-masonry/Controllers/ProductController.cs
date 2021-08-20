@@ -2,7 +2,7 @@
 using ecommerce_masonry.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace ecommerce_masonry.Controllers
 {
@@ -22,10 +22,10 @@ namespace ecommerce_masonry.Controllers
         {
             IEnumerable<Product> objectList = _db.Product; // Retrieve all categories from database and store on objectList
 
-            foreach (var obj in objectList)
+            foreach (var obj in objectList) // This iterates through all of the products that we have in the objectList
             {
-                obj.Category = _db.Category.FirstOrDefault(u => u.Id == obj.Category.ID);
-            }
+                obj.Category = _db.Category.FirstOrDefault(u => u.ID == obj.CategoryId);
+            } // each object will load the Category model based on the condition above.
 
             return View(objectList);
         }
