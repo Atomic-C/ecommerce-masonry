@@ -1,6 +1,7 @@
 ﻿using ecommerce_masonry.Data;
 using ecommerce_masonry.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,6 +34,16 @@ namespace ecommerce_masonry.Controllers
         // GET FOR UPSERT
         public IActionResult Upsert(int? id) // Here we display empty box to enter name and display order for new category to create
         {
+            IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i => new SelectListItem
+            {
+                Text = i.CategoryName,
+                Value = id.ToString()
+            }); // Here we are retriving all categories from database and we convert them to selectlistitem so we can have them in an enumerable object and then display them in a dropdown
+
+
+            //Then we pass this category dropdown to the view, sow e can display it
+            ViewBag.CategoryDropDown = CategoryDropDown; // Controller ---> view passing
+
             Product product = new Product();
 
             if (id == null) // If it's null, it's for CREATE :D
