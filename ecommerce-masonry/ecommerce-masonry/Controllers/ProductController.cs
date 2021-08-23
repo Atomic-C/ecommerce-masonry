@@ -30,16 +30,30 @@ namespace ecommerce_masonry.Controllers
             return View(objectList);
         }
 
-        // GET FOR CREATE
-        public IActionResult Create() // Here we display empty box to enter name and display order for new category to create
+        // GET FOR UPSERT
+        public IActionResult Upsert(int? id) // Here we display empty box to enter name and display order for new category to create
         {
-            return View();
+            Product product = new Product();
+
+            if (id == null) // If it's null, it's for CREATE :D
+            {
+                return View(product);
+            }
+            else
+            {
+                product = _db.Product.Find(id); // This means id is not null and we need to retrieve product from database and pass it to the view just like we did with editing of category.
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return View(product); // If it does find the product, returns back to the view with product!!!
+            }
         }
 
-        // POST FOR CREATE
+        // POST FOR UPSERT
         [HttpPost] // We define this as a post action method, with this attribute
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
-        public IActionResult Create(Category obj)
+        public IActionResult Upsert(Category obj)
         {
             if (ModelState.IsValid)
             {
@@ -51,22 +65,7 @@ namespace ecommerce_masonry.Controllers
             return View(obj);
         }
 
-        // GET FOR EDIT
-        public IActionResult Edit(int? id) // Receive id from asp-route on View Category Index
-        {
-            if (id == null || id == 0) // Check these invalid conditions, we don't want them
-            {
-                return NotFound();
-            }
 
-            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
-
-            if (obj == null) // Check this invalid condition, we don't want it. (If not found)
-            {
-                return NotFound();
-            }
-            return View(obj); // If we found the record, pass it to the view so we can display it!!!
-        }
 
         // POST FOR EDIT
         [HttpPost] // We define this as a post action method, with this attribute
