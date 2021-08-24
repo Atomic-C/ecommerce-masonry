@@ -1,5 +1,6 @@
 ﻿using ecommerce_masonry.Data;
 using ecommerce_masonry.Models;
+using ecommerce_masonry.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -34,30 +35,40 @@ namespace ecommerce_masonry.Controllers
         // GET FOR UPSERT
         public IActionResult Upsert(int? id) // Here we display empty box to enter name and display order for new category to create
         {
-            IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i => new SelectListItem
+            //IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i => new SelectListItem
+            //{
+            //    Text = i.CategoryName,
+            //    Value = id.ToString()
+            //}); // Here we are retriving all categories from database and we convert them to selectlistitem so we can have them in an enumerable object and then display them in a dropdown
+
+
+            ////Then we pass this category dropdown to the view, sow e can display it
+            //ViewBag.CategoryDropDown = CategoryDropDown; // Controller ---> view passing
+
+            //Product product = new Product();
+
+            ProductViewModel productViewModel = new ProductViewModel()
             {
-                Text = i.CategoryName,
-                Value = id.ToString()
-            }); // Here we are retriving all categories from database and we convert them to selectlistitem so we can have them in an enumerable object and then display them in a dropdown
-
-
-            //Then we pass this category dropdown to the view, sow e can display it
-            ViewBag.CategoryDropDown = CategoryDropDown; // Controller ---> view passing
-
-            Product product = new Product();
+                Product = new Product(),
+                CategorySelectList = _db.Category.Select(i => new SelectListItem
+                {
+                    Text = i.CategoryName,
+                    Value = id.ToString()
+                })
+            };
 
             if (id == null) // If it's null, it's for CREATE :D
             {
-                return View(product);
+                return View(productViewModel);
             }
             else
             {
-                product = _db.Product.Find(id); // This means id is not null and we need to retrieve product from database and pass it to the view just like we did with editing of category.
-                if (product == null)
+                productViewModel.Product = _db.Product.Find(id); // This means id is not null and we need to retrieve product from database and pass it to the view just like we did with editing of category.
+                if (productViewModel == null)
                 {
                     return NotFound();
                 }
-                return View(product); // If it does find the product, returns back to the view with product!!!
+                return View(productViewModel); // If it does find the product, returns back to the view with product!!!
             }
         }
 
