@@ -1,9 +1,12 @@
 ﻿using ecommerce_masonry.Data;
 using ecommerce_masonry.Models;
 using ecommerce_masonry.Models.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace ecommerce_masonry.Controllers
@@ -11,11 +14,12 @@ namespace ecommerce_masonry.Controllers
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
-
-        public ProductController(ApplicationDbContext db) // We populate the property above using dependency injection
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment) // We populate the property above using dependency injection
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // More on DI: https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
@@ -75,16 +79,39 @@ namespace ecommerce_masonry.Controllers
         // POST FOR UPSERT
         [HttpPost] // We define this as a post action method, with this attribute
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
-        public IActionResult Upsert(Category obj)
+        public IActionResult Upsert(ProductViewModel productViewModel)
         {
             if (ModelState.IsValid)
             {
-                _db.Category.Add(obj); // So this adds to the database.
-                _db.SaveChanges(); // But this is what actually saves it?!?
+                var files = HttpContext.Request.Form.Files;
+                string webRootPath = _webHostEnvironment.WebRootPath;
 
+                if (productViewModel.Product.Id == 0)
+                {
+                    // Create
+                    string upload = webRootPath + WebConstance.imagePath;
+                    string filename = Guid.NewGuid().ToString();
+                    string extension = Path.GetExtension(files[0].FileName);
+
+                    using (var fileStream = new FileStream(Path.Combine(upload, filename + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    productViewModel.Product.Image = filename + extension;
+
+                    _db.Product.Add(productViewModel.Product);
+
+                }
+                else
+                {
+                    // Update
+
+                }
+                _db.SaveChanges();
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-            return View(obj);
+            return View();
         }
 
 
