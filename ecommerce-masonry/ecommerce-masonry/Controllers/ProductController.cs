@@ -88,33 +88,6 @@ namespace ecommerce_masonry.Controllers
         }
 
 
-
-        // POST FOR EDIT
-        [HttpPost] // We define this as a post action method, with this attribute
-        [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
-        public IActionResult Edit(Category obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Category.Update(obj); // So this Updates the database.
-                _db.SaveChanges(); // But this is what actually saves it?!?
-
-                return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
-            }
-            return View(obj);
-        }
-        /*
-        TODO: GOOGLE
-        SqlException: Cannot insert explicit value for identity column in table 'Category' when IDENTITY_INSERT is set to OFF.
-
-        https://appuals.com/how-to-fix-the-error-cannot-insert-explicit-value-for-identity-column-in-table-when-identity_insert-is-set-to-off/
-
-            https://makolyte.com/sqlexception-cannot-insert-explicit-value-for-identity-column/
-
-        I ended up messing the database a little and had to revert it:
-        https://stackoverflow.com/questions/38192450/how-to-unapply-a-migration-in-asp-net-core-with-ef-core
-        */
-
         // GET FOR DELETE
         public IActionResult Delete(int? id) // Receive id from asp-route on View Category Index
         {

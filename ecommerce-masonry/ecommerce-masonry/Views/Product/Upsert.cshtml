@@ -17,7 +17,7 @@
 
 
     <div class="border p-3">
-        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     </div>
     <div class="form-group row">
         <h2 class="text-info pl-3"> @title</h2>
@@ -60,7 +60,7 @@
                         Image
                     </div>
                     <div class="col-8">
-                        <input type="file" name="files" id="uploadBox" multiple asp-for="Product.Image" class="form-control" />
+                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
                     </div>
 
                 </div>
@@ -107,17 +107,19 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
     <script>
-        function validadeInput() { }
-        if (document.getElementById("uploadBox").value == "") {
-            Swal.fire(
-                'Error!',
-                'Please upload an image!',
-                'error'
-            )
-            return false;
+        function validadeInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                )
+                return false;
+            }
+            return true;
         }
-        return true;
     </script>
 }
