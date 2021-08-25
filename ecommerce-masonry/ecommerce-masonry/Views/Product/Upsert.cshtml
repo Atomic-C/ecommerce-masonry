@@ -49,7 +49,7 @@
                         <label asp-for="Product.Description"></label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="Product.Description" class="form-control" />
+                        <textarea asp-for="Product.Description" class="form-control summernote"></textarea>
                         <span asp-validation-for="Product.Description" class="text-danger"></span>
                     </div>
 
@@ -107,9 +107,13 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" />
-    }
+                        <partial name="_ValidationScriptsPartial" /> }
     <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height: 300
+            });
+        });
         function validateInput() {
             if (document.getElementById("uploadBox").value == "") {
                 Swal.fire(
