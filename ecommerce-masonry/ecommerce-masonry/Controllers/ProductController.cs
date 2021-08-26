@@ -57,7 +57,7 @@ namespace ecommerce_masonry.Controllers
                 CategorySelectList = _db.Category.Select(i => new SelectListItem
                 {
                     Text = i.CategoryName,
-                    Value = id.ToString()
+                    Value = i.ID.ToString()
                 })
             };
 
@@ -105,7 +105,7 @@ namespace ecommerce_masonry.Controllers
                 }
                 else
                 {
-                    // Update
+                    // Update 
 
                 }
                 _db.SaveChanges();
