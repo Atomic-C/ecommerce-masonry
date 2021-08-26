@@ -4,6 +4,7 @@ using ecommerce_masonry.Models.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,7 +107,32 @@ namespace ecommerce_masonry.Controllers
                 else
                 {
                     // Update 
+                    var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productViewModel.Product.Id);
 
+                    if (files.Count > 0)
+                    {
+                        string upload = webRootPath + WebConstance.imagePath;
+                        string filename = Guid.NewGuid().ToString();
+                        string extension = Path.GetExtension(files[0].FileName);
+
+                        var oldFile = Path.Combine(upload, objFromDb.Image);
+
+                        if (System.IO.File.Exists(oldFile))
+                        {
+                            System.IO.File.Delete(oldFile);
+                        }
+
+                        using (var fileStream = new FileStream(Path.Combine(upload, filename + extension), FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStream);
+                        }
+                        productViewModel.Product.Image = filename + extension;
+                    }
+                    else
+                    {
+                        productViewModel.Product.Image = objFromDb.Image;
+                    }
+                    _db.Product.Update(productViewModel.Product);
                 }
                 _db.SaveChanges();
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
