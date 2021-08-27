@@ -48,18 +48,18 @@ namespace ecommerce_masonry.Controllers
         }
 
         // GET FOR EDIT
-        public IActionResult Edit(int? id) // Receive id from asp-route on View Category Index
+        public IActionResult Edit(int? id) // Receive id from asp-route-id="@obj.ID" Category View  Index
         {
             if (id == null || id == 0) // Check these invalid conditions, we don't want them
             {
-                return NotFound();
+                return NotFound(); // Return not found because it's invalid.
             }
 
             var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
 
             if (obj == null) // Check this invalid condition, we don't want it. (If not found)
             {
-                return NotFound();
+                return NotFound(); // This means record was not found.
             }
             return View(obj); // If we found the record, pass it to the view so we can display it!!!
         }
