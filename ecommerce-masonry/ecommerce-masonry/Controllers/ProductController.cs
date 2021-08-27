@@ -148,14 +148,16 @@ namespace ecommerce_masonry.Controllers
             {
                 return NotFound();
             }
+            Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
+            // product.Category = _db.Category.Find(product.CategoryId);
 
             var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
 
-            if (obj == null) // Check this invalid condition, we don't want it. (If not found)
+            if (product == null) // Check this invalid condition, we don't want it. (If not found)
             {
                 return NotFound();
             }
-            return View(obj); // If we found the record, pass it to the view so we can display it!!!
+            return View(product); // If we found the record, pass it to the view so we can display it!!!
         }
 
         // POST FOR DELETE
@@ -163,12 +165,26 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+
+            string webRootPath = _webHostEnvironment.WebRootPath;
+
+            var obj = _db.Product.Find(id); // We retrieve category from the database if valid.
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.Category.Remove(obj); // So this Removes the database.
+
+            string upload = webRootPath + WebConstance.imagePath;
+
+
+            var oldFile = Path.Combine(upload, obj.Image);
+
+            if (System.IO.File.Exists(oldFile))
+            {
+                System.IO.File.Delete(oldFile);
+            }
+
+            _db.Product.Remove(obj); // So this Removes the database.
             _db.SaveChanges(); // But this is what actually saves it?!?
 
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here

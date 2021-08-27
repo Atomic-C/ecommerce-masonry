@@ -1,0 +1,99 @@
+﻿@model ecommerce_masonry.Models.Product
+@*Form executes post method and looks for post action method of "Upsert"*@
+<form method="post" asp-action="DeletePost">
+
+
+    <input asp-for="Id" hidden />//"hidden" solves an error, when we have a complex object in category. Test it.
+
+
+
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+    <div class="form-group row">
+        <h2 class="text-info pl-3"> Delete Product</h2>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" disabled class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Price"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Price" disabled class="form-control" />
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Description"></label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="Description" class="form-control summernote"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="CategoryId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Category.CategoryName" disabled class="form-control" />
+                    </div>
+
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+
+                            <button type="submit" class=" btn btn-danger w-100">Delete</button>
+
+                        </div>
+                        <div class="col">
+                            <a asp-controller="Category" asp-action="Index" class="btn btn-success"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
+                            @* If we're using views within same category, asp-controller="category" can be optional'  *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+                @if (Model.Id != 0)
+                {
+    <img src="@WebConstance.imagePath@Model.Image" width="100%" style="border-radius:5px; border:1px solid #bbb" />};
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+@*The below section adds the client side validation*@
+@section Scripts{
+
+    @{
+                        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        $(document).ready(function () {
+            $('.summernote').summernote({
+                height: 300,
+                disable: true
+            });
+        });
+
+                                                                                    }</script>
+}
