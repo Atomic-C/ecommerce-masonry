@@ -2,7 +2,7 @@
 using ecommerce_masonry.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace ecommerce_masonry.Controllers
 {
@@ -35,14 +35,16 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult Create(Category obj)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // This checks if all of the rules I defined in model are valid, if so, enter condition.
             {
                 _db.Category.Add(obj); // So this adds to the database.
                 _db.SaveChanges(); // But this is what actually saves it?!?
 
+                Debug.WriteLine(ModelState.IsValid);
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-            return View(obj);
+            Debug.WriteLine(ModelState.IsValid);
+            return View(obj); // If not valid re return back to the view to display error message.
         }
 
         // GET FOR EDIT

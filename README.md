@@ -5,4 +5,6 @@ Entity Framework .NET Core;
 Mycrosoft SQL server;
 MVC;
 
+CRUD operations;
+
 KISS;
