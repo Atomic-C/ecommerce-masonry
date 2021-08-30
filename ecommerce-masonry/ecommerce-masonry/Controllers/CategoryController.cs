@@ -113,7 +113,7 @@ namespace ecommerce_masonry.Controllers
         public IActionResult DeletePost(int? id)
         {
             var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
-            if (obj == null)
+            if (obj == null) // If this is null then we have nothing to delete.
             {
                 return NotFound();
             }

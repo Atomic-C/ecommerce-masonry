@@ -37,10 +37,13 @@
                     <div class="col-8 offset-4 row">
 
                         <div class="col">
-                            <input type="submit" class=" btn btn-danger w-100" value="Delete" />
+                            @* <input type="submit" class=" btn btn-danger w-100" value="Delete" />*@
+                            <button type="submit" class="btn btn-danger w-100">
+                                <i class="fas fa-trash-alt"></i> &nbsp; Delete
+                            </button>
                         </div>
                         <div class="col">
-                            <a asp-controller="Category" asp-action="Index" class="btn btn-success"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
+                            <a asp-controller="Category" asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
                             @* If we're using views within same category, asp-controller="category" can be optional'  *@
                         </div>
                     </div>
