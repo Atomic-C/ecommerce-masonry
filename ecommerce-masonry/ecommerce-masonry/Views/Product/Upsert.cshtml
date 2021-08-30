@@ -88,8 +88,10 @@
                 </button> }
             else
             {
-                // THEN Create
-<input type="submit" onclick="return validateInput()" class=" btn btn-primary w-100" value="Create" />}
+                // THEN Create @*<input type="submit" onclick="return validateInput()" class=" btn btn-primary w-100" value="Create" />*@
+<button type="submit" class="btn btn-primary w-100">
+    <i class="fas fa-plus"></i> &nbsp; Create
+</button>}
                         </div>
                         <div class="col">
                             <a asp-controller="Category" asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
@@ -111,7 +113,8 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
