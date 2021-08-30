@@ -4,7 +4,7 @@
     @*We can delete this "asp-action="DeletePost"". It's optional' because we are in DeletePost post action and it is the same name as DeletePost*@
 
 
-    <input asp-for="Id" hidden />//"hidden" solves an error, when we have a complex object in category. Test it.
+    <input asp-for="Id" hidden /> @*"hidden" solves an error, when we have a complex object in category. Test it.*@
 
 
 
@@ -86,8 +86,7 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" />
-    }
+                        <partial name="_ValidationScriptsPartial" /> }
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
@@ -96,5 +95,5 @@
             });
         });
 
-                                                                                                            }</script>
+                                                                                                                }</script>
 }
