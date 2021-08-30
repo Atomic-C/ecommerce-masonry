@@ -65,7 +65,7 @@
 
                         </div>
                         <div class="col">
-                            <a asp-controller="Category" asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
+                            <a asp-controller="Product" asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> &nbsp; Back</a>
                             @* If we're using views within same category, asp-controller="category" can be optional'  *@
                         </div>
                     </div>
@@ -86,7 +86,8 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
@@ -95,5 +96,5 @@
             });
         });
 
-                                                                                                                }</script>
+                                                                                                                    }</script>
 }
