@@ -2,10 +2,11 @@
 
 
 <form method="post" asp-action="Create">
+    @*We can delete this ""asp-action="Create"". It's optional' because we are in Create post action and it is the same name as Create*@
     @*Form executes post method and looks for post action method of "create"*@
 
     <div class="border p-3">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
     </div>
     <div class="form-group row">
         <h2 class="text-info pl-3"> Create Category</h2>
@@ -56,7 +57,6 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" />
-    }
+                        <partial name="_ValidationScriptsPartial" /> }
 
 }

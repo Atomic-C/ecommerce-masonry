@@ -6,6 +6,7 @@
 
 @*Form executes post method and looks for post action method of "Upsert"*@
 <form method="post" enctype="multipart/form-data" asp-action="Upsert">
+    @*We can delete this "asp-action="Upsert"". It's optional' because we are in Upsert post action and it is the same name as Upsert*@
 
     @*If this is Create intent, there is no ID. IMPORTANT*@
     @if (Model.Product.Id != 0)

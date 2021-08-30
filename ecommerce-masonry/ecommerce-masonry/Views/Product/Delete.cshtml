@@ -1,6 +1,7 @@
 ﻿@model ecommerce_masonry.Models.Product
-@*Form executes post method and looks for post action method of "Upsert"*@
+@*Form executes post method and looks for post action method of "DeletePost"*@
 <form method="post" asp-action="DeletePost">
+    @*We can delete this "asp-action="DeletePost"". It's optional' because we are in DeletePost post action and it is the same name as DeletePost*@
 
 
     <input asp-for="Id" hidden />//"hidden" solves an error, when we have a complex object in category. Test it.
@@ -95,5 +96,5 @@
             });
         });
 
-                                                                                    }</script>
+                                                                                                    }</script>
 }

@@ -2,6 +2,7 @@
 
 
 <form method="post" asp-action="Edit">
+    @*We can delete this "asp-action="Edit"". It's optional' because we are in Edit post action and it is the same name as Edit*@
     <input asp-for="ID" hidden /> @*This solves an error, when we have a complex object in category. Test it.*@
     @*Form executes post method and looks for post action method of "Edit"*@
 
