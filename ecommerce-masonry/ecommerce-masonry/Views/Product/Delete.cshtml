@@ -39,7 +39,7 @@
                         <label asp-for="Description"></label>
                     </div>
                     <div class="col-8">
-                        <textarea asp-for="Description" class="form-control summernote"></textarea>
+                        <textarea asp-for="Description" disabled class="form-control summernote"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
 
@@ -86,8 +86,7 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" />
-    }
+                        <partial name="_ValidationScriptsPartial" /> }
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
@@ -96,5 +95,5 @@
             });
         });
 
-                                                                                                                    }</script>
+                                                                                                                        }</script>
 }
