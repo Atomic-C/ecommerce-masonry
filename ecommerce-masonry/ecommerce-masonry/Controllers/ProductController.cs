@@ -33,24 +33,12 @@ namespace ecommerce_masonry.Controllers
             {
                 obj.Category = _db.Category.FirstOrDefault(u => u.ID == obj.CategoryId);
             } // each object will load the Category model based on the condition above.
-
             return View(objectList);
         }
 
         // GET FOR UPSERT
         public IActionResult Upsert(int? id) // Here we display empty box to enter name and display order for new category to create
         {
-            //IEnumerable<SelectListItem> CategoryDropDown = _db.Category.Select(i => new SelectListItem
-            //{
-            //    Text = i.CategoryName,
-            //    Value = id.ToString()
-            //}); // Here we are retriving all categories from database and we convert them to selectlistitem so we can have them in an enumerable object and then display them in a dropdown
-
-
-            ////Then we pass this category dropdown to the view, sow e can display it
-            //ViewBag.CategoryDropDown = CategoryDropDown; // Controller ---> view passing
-
-            //Product product = new Product();
 
             ProductViewModel productViewModel = new ProductViewModel()
             {
