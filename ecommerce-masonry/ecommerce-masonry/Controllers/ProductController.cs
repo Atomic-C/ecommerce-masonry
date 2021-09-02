@@ -15,12 +15,12 @@ namespace ecommerce_masonry.Controllers
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IWebHostEnvironment _webHostEnvironment; // ASP.NET CORE Built in dependency to use our web constance
         public ProductController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment) // We populate the property above using dependency injection
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
             _db = db;
-            _webHostEnvironment = webHostEnvironment;
+            _webHostEnvironment = webHostEnvironment; // We get IWebHostEnvironment via dependency injection?!?
         }
 
         // More on DI: https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
@@ -72,24 +72,24 @@ namespace ecommerce_masonry.Controllers
         {
             if (ModelState.IsValid)
             {
-                var files = HttpContext.Request.Form.Files;
-                string webRootPath = _webHostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files; // Here we retrive our uploaded image
+                string webRootPath = _webHostEnvironment.WebRootPath; // This is our path to our www root folder. I don't get it. Don't we have a WebConstance class for this?
 
-                if (productViewModel.Product.Id == 0)
+                if (productViewModel.Product.Id == 0) // To find out if we're calling function for Create or Update
                 {
                     // Create
-                    string upload = webRootPath + WebConstance.imagePath;
-                    string filename = Guid.NewGuid().ToString();
-                    string extension = Path.GetExtension(files[0].FileName);
+                    string upload = webRootPath + WebConstance.imagePath; // We get our path to the folder where we save Image
+                    string filename = Guid.NewGuid().ToString(); // This creates random filename
+                    string extension = Path.GetExtension(files[0].FileName); // We get extension of uploaded file
 
                     using (var fileStream = new FileStream(Path.Combine(upload, filename + extension), FileMode.Create))
                     {
                         files[0].CopyTo(fileStream);
                     }
 
-                    productViewModel.Product.Image = filename + extension;
+                    productViewModel.Product.Image = filename + extension; // Here we're storing the new guid name for file and extension. Not the path!!
 
-                    _db.Product.Add(productViewModel.Product);
+                    _db.Product.Add(productViewModel.Product); // Here we add the product
 
                 }
                 else
@@ -122,7 +122,7 @@ namespace ecommerce_masonry.Controllers
                     }
                     _db.Product.Update(productViewModel.Product);
                 }
-                _db.SaveChanges();
+                _db.SaveChanges(); // This is what actually saves it after we update.
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
             return View();
