@@ -143,6 +143,7 @@ namespace ecommerce_masonry.Controllers
             {
                 return NotFound();
             }
+
             Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
             // product.Category = _db.Category.Find(product.CategoryId);
 
@@ -156,7 +157,7 @@ namespace ecommerce_masonry.Controllers
         }
 
         // POST FOR DELETE
-        [HttpPost] // We define this as a post action method, with this attribute
+        [HttpPost, ActionName("Delete")] // We define this as a post action method, with this attribute
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult DeletePost(int? id)
         {
