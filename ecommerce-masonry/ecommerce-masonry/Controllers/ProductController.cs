@@ -126,7 +126,13 @@ namespace ecommerce_masonry.Controllers
                 _db.SaveChanges(); // This is what actually saves it after we update.
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-            return View();
+            // The below method works so we get the category list even if modelstate is false.
+            productViewModel.CategorySelectList = _db.Category.Select(i => new SelectListItem
+            {
+                Text = i.CategoryName,
+                Value = i.ID.ToString()
+            });
+            return View(productViewModel); // We need the view model that was originally passed above.
         }
 
 
