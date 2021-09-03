@@ -84,7 +84,7 @@ namespace ecommerce_masonry.Controllers
 
                     using (var fileStream = new FileStream(Path.Combine(upload, filename + extension), FileMode.Create))
                     {
-                        files[0].CopyTo(fileStream);
+                        files[0].CopyTo(fileStream); // We copy file to new location
                     }
 
                     productViewModel.Product.Image = filename + extension; // Here we're storing the new guid name for file and extension. Not the path!!
@@ -95,6 +95,7 @@ namespace ecommerce_masonry.Controllers
                 else
                 {
                     // Update 
+                    // Since we're retriving this only to get the name of the old image, so we don't need to track it
                     var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productViewModel.Product.Id);
 
                     if (files.Count > 0)
@@ -103,22 +104,22 @@ namespace ecommerce_masonry.Controllers
                         string filename = Guid.NewGuid().ToString();
                         string extension = Path.GetExtension(files[0].FileName);
 
-                        var oldFile = Path.Combine(upload, objFromDb.Image);
+                        var oldFile = Path.Combine(upload, objFromDb.Image); // We store old file here
 
-                        if (System.IO.File.Exists(oldFile))
+                        if (System.IO.File.Exists(oldFile)) // We check if file exists
                         {
-                            System.IO.File.Delete(oldFile);
+                            System.IO.File.Delete(oldFile); // We delete if the file exists
                         }
 
                         using (var fileStream = new FileStream(Path.Combine(upload, filename + extension), FileMode.Create))
                         {
-                            files[0].CopyTo(fileStream);
+                            files[0].CopyTo(fileStream); // This moves in the new image inside the folder!!
                         }
-                        productViewModel.Product.Image = filename + extension;
+                        productViewModel.Product.Image = filename + extension; // The image is saved here. file and extension.
                     }
-                    else
+                    else // In case we updated anything else but image
                     {
-                        productViewModel.Product.Image = objFromDb.Image;
+                        productViewModel.Product.Image = objFromDb.Image; // Image was not updated and we keep it as is
                     }
                     _db.Product.Update(productViewModel.Product);
                 }
