@@ -26,15 +26,17 @@ namespace ecommerce_masonry.Controllers
         // More on DI: https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
 
         public IActionResult Index()
-        {
-            IEnumerable<Product> objectList = _db.Product; // Retrieve all categories from database and store on objectList
+        {   // With eager loading we have less database calls, as opposed to the below commented foreach block. 
+            IEnumerable<Product> objectList = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType);
 
-            foreach (var obj in objectList) // This iterates through all of the products that we have in the objectList
-            {
-                obj.Category = _db.Category.FirstOrDefault(u => u.ID == obj.CategoryId);
-                // each object will load the Category model based on the condition above.
-                obj.ApplicationType = _db.ApplicationType.FirstOrDefault(u => u.ID == obj.ApplicationTypeId);
-            }
+
+            //IEnumerable<Product> objectList = _db.Product; // Retrieve all categories from database and store on objectList
+            //foreach (var obj in objectList) // This iterates through all of the products that we have in the objectList
+            //{
+            //    obj.Category = _db.Category.FirstOrDefault(u => u.ID == obj.CategoryId);
+            //    // each object will load the Category model based on the condition above.
+            //    obj.ApplicationType = _db.ApplicationType.FirstOrDefault(u => u.ID == obj.ApplicationTypeId);
+            //}
             return View(objectList);
         }
 
@@ -157,6 +159,7 @@ namespace ecommerce_masonry.Controllers
                 return NotFound();
             }
             // Below is eager loading concept.
+            //This is a great way to save resources because only one query gets executed
             Product product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType).FirstOrDefault(u => u.Id == id);
             // product.Category = _db.Category.Find(product.CategoryId);
 
