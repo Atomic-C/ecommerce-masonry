@@ -32,7 +32,9 @@ namespace ecommerce_masonry.Controllers
             foreach (var obj in objectList) // This iterates through all of the products that we have in the objectList
             {
                 obj.Category = _db.Category.FirstOrDefault(u => u.ID == obj.CategoryId);
-            } // each object will load the Category model based on the condition above.
+                // each object will load the Category model based on the condition above.
+                obj.ApplicationType = _db.ApplicationType.FirstOrDefault(u => u.ID == obj.ApplicationTypeId);
+            }
             return View(objectList);
         }
 
@@ -44,6 +46,11 @@ namespace ecommerce_masonry.Controllers
             {
                 Product = new Product(),
                 CategorySelectList = _db.Category.Select(i => new SelectListItem
+                {
+                    Text = i.CategoryName,
+                    Value = i.ID.ToString()
+                }),
+                ApplicationTypeSelectList = _db.ApplicationType.Select(i => new SelectListItem
                 {
                     Text = i.CategoryName,
                     Value = i.ID.ToString()
@@ -132,6 +139,12 @@ namespace ecommerce_masonry.Controllers
                 Text = i.CategoryName,
                 Value = i.ID.ToString()
             });
+            // The below method works so we get the ApplicationType list even if modelstate is false.
+            productViewModel.ApplicationTypeSelectList = _db.ApplicationType.Select(i => new SelectListItem
+            {
+                Text = i.CategoryName,
+                Value = i.ID.ToString()
+            });
             return View(productViewModel); // We need the view model that was originally passed above.
         }
 
@@ -143,8 +156,8 @@ namespace ecommerce_masonry.Controllers
             {
                 return NotFound();
             }
-
-            Product product = _db.Product.Include(u => u.Category).FirstOrDefault(u => u.Id == id);
+            // Below is eager loading concept.
+            Product product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType).FirstOrDefault(u => u.Id == id);
             // product.Category = _db.Category.Find(product.CategoryId);
 
             var obj = _db.Category.Find(id); // We retrieve category from the database if valid.

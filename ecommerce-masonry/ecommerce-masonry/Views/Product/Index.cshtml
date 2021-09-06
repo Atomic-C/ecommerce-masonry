@@ -27,7 +27,15 @@
             <th>
                 Price
             </th>
-            <th>Options</th>
+            <th>
+                Category
+            </th>
+            <th>
+                Application Type
+            </th>
+            <th>
+                Image (TODO)
+            </th>
         </tr>
 
     </thead>
@@ -36,8 +44,11 @@
         @foreach (var obj in Model) // Model is an IEnumerable of list of product
         {
 <tr>
-    <td width="50%">@obj.Name</td>
-    <td width="30%">@obj.Price</td>
+    <td width="30%">@obj.Name</td>
+    <td width="10%">@obj.Price</td>
+    <td width="10%">@obj.Category.CategoryName</td>
+    <td width="10%">@obj.ApplicationType.CategoryName</td>
+    <td width="10%">@obj.Image</td>
     <td class="text-center">
         @* So, do we use  asp-route-data="@obj.ID" or asp-route-id="@obj.ID" ???*@
         <div class="w-75 btn-group" role="group">

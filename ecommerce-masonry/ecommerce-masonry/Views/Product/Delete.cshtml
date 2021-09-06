@@ -52,6 +52,14 @@
                         <input asp-for="Category.CategoryName" disabled class="form-control" />
                     </div>
 
+                </div>                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="ApplicationTypeId"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="ApplicationType.CategoryName" disabled class="form-control" />
+                    </div>
+
                 </div>
 
 
@@ -85,7 +93,8 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
@@ -94,5 +103,5 @@
             });
         });
 
-                                                                                                                                }</script>
+                                                                                                                                    }</script>
 }
