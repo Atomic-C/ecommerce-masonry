@@ -11,6 +11,7 @@ namespace ecommerce_masonry.Models
         [Required] // Required fields exist so EF core alters the database, it makes the column not nullable. Add migration 
         // Then push to database always.
         public string Name { get; set; }
+        public string ShortDesc { get; set; }
         public string Description { get; set; }
         [Range(1, int.MaxValue)]
         public double Price { get; set; }

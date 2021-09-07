@@ -44,6 +44,16 @@
                     </div>
 
                 </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Product.ShortDesc"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.ShortDesc" class="form-control" />
+                        <span asp-validation-for="Product.ShortDesc" class="text-danger"></span>
+                    </div>
+
+                </div>
 
                 <div class="form-group row">
                     <div class="col-4">
@@ -125,7 +135,8 @@
 @section Scripts{
 
     @{
-                        <partial name="_ValidationScriptsPartial" /> }
+                        <partial name="_ValidationScriptsPartial" />
+    }
     <script>
         $(document).ready(function () {
             $('.summernote').summernote({
