@@ -1,5 +1,8 @@
-﻿using ecommerce_masonry.Models;
+﻿using ecommerce_masonry.Data;
+using ecommerce_masonry.Models;
+using ecommerce_masonry.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,14 +15,22 @@ namespace ecommerce_masonry.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
+            HomeViewModel homeViewModel = new HomeViewModel() // Here we populate both properties for our HomeViewModel!!
+            {
+                Products = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType),
+                Categories = _db.Category
+            };
             return View();
         }
 
