@@ -7,6 +7,8 @@ MVC;
 
 CRUD operations;
 
+Eager loading;
+
 KISS;
 
 Hosted at: https://ecommerce-masonry.azurewebsites.net/

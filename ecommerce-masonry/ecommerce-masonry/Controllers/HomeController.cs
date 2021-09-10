@@ -34,6 +34,16 @@ namespace ecommerce_masonry.Controllers
             return View(homeViewModel); // If we don't assign homeViewModel to our view we get a System.NullReferenceException: 'Object reference not set to an instance of an object.'
         }
 
+        public IActionResult Details(int id)
+        {
+            DetailsViewModel DetailsViewModel = new DetailsViewModel()
+            {
+                Product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType).Where(u => u.Id == id).FirstOrDefault(),
+                IsInCart = false
+            };
+            return View(DetailsViewModel);
+        }
+
         public IActionResult Privacy()
         {
             return View();
