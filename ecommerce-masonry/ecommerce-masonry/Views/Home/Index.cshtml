@@ -11,6 +11,7 @@
             <button class="btn btn-dark filter-button" data-filter="all">All</button>
             @foreach (var obj in Model.Categories)
             {
+                // Display all categories
 
             <button class="btn btn-outline-secondary filter-button" data-filter="@obj.CategoryName.Replace(" ","_")">@obj.CategoryName</button>
 
@@ -21,7 +22,7 @@
             @foreach (var obj in Model.Products)
             {
                 // Display all products
-
+                <partial name="_IndividualProductCard" model="obj" /> // partial view is used so we can use it in more than one place
             }
         </div>
     </div>
