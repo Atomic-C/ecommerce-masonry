@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
-@inject HttpContextAccessor HttpContextAccessor
+@inject IHttpContextAccessor HttpContextAccessor
 @using ecommerce_masonry.Utility
 
 <!DOCTYPE html>
@@ -54,20 +54,18 @@
                         <li>
                             @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart) != null)
                             {
-                                <a asp-action="Index" asp-controller="Cart" class=" nav-link">
-                                    @{ 
-                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart).Count;
-                                    }
-                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
-                                </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="#" class="nav-link">
+                        <a asp-action="Index" asp-controller="Cart" class=" nav-link">
+                            @{ var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart).Count; }
+                            <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                        </a> }
+                                    else
+                                    {
+                                        <a href="#" class="nav-link">
                                             <i class="fas fa-shopping-cart"></i> &nbsp; (0)
 
-                                            </a>
-                                        }
+                                        </a>
+                                    }
+                            @* https://www.reddit.com/r/csharp/comments/gukq4e/no_service_for_type/ I registered the interface, not the concrete type. *@
                         </li>
                     </ul>
                 </div>
