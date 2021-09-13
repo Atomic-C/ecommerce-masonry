@@ -22,7 +22,14 @@ namespace ecommerce_masonry
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // This is the configuration we use.
-
+            services.AddHttpContextAccessor();
+            services.AddSession(Options =>
+            {
+                // Here we configure out options for the session
+                Options.IdleTimeout = System.TimeSpan.FromMinutes(10);
+                Options.Cookie.HttpOnly = true;
+                Options.Cookie.IsEssential = true;  
+            });
             services.AddControllersWithViews();
         }
 
@@ -45,7 +52,9 @@ namespace ecommerce_masonry
             app.UseRouting();
 
             app.UseAuthorization();
-
+            // Below we configure out session
+            // By default only string and integer can be stored on .NETCORE. So we can add extension methods on session to configure this.
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
