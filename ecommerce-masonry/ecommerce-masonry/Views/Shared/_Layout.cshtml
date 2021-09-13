@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject HttpContextAccessor HttpContextAccessor
+@using ecommerce_masonry.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,14 +29,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                        </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                            </li>*@
                         @*<li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="TransportCategory" asp-action="Index">Transport Type</a>
                             </li>*@
@@ -46,6 +50,24 @@
                                 <li><a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             </ul>
+                        </li>
+                        <li>
+                            @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart) != null)
+                            {
+                                <a asp-action="Index" asp-controller="Cart" class=" nav-link">
+                                    @{ 
+                                        var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart).Count;
+                                    }
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="nav-link">
+                                            <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+
+                                            </a>
+                                        }
                         </li>
                     </ul>
                 </div>
