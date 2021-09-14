@@ -38,11 +38,29 @@ namespace ecommerce_masonry.Controllers
 
         public IActionResult Details(int id)
         {
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstance.SessionCart) != null && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstance.SessionCart).Count() > 0)
+            {
+                // Here we know session exists, we want to retrive that session and add an item to it
+                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart); // If there's something, it gts retrived 
+            }
+            // The above logic was imported from DetailsPost to retrive session and check if product exists in session to set the boolean flag.
+
+
             DetailsViewModel DetailsViewModel = new DetailsViewModel()
             {
                 Product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType).Where(u => u.Id == id).FirstOrDefault(),
                 IsInCart = false
             };
+
+            foreach (var item in shoppingCartList) // For each item in shoppingCartList
+            {
+                if (item.ProductId == id) // Check if it is already in shoppingCartList
+                {
+                    DetailsViewModel.IsInCart = true; // If it is, set flag to true. Otherwise it's false by default, no need for else.
+                }
+            }
+
             return View(DetailsViewModel);
         }
         
