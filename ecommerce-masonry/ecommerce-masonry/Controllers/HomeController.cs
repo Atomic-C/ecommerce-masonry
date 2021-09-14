@@ -79,6 +79,28 @@ namespace ecommerce_masonry.Controllers
             return RedirectToAction(nameof(Index)); // To redirect back to home page we use redirect and nameof method, of an action method to avoid magic strings.
         }
 
+        public IActionResult RemoveFromCart(int id)
+        {
+
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstance.SessionCart) != null && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstance.SessionCart).Count() > 0)
+            {
+                // Here we know session exists, we want to retrive that session and add an item to it
+                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart); // If there's something, it gts retrived 
+            }
+
+            var itemToRemove = shoppingCartList.SingleOrDefault(r => r.ProductId == id); // If there is any item in the shoppingCartList that matches this id we store it here
+
+            if (itemToRemove != null) // We check if there is an item to be removed.
+            {
+                shoppingCartList.Remove(itemToRemove);
+            }
+
+            //shoppingCartList.Add(new ShoppingCart { ProductId = id }); // If empty we directly add to it
+            HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList); // We set the shopping cart again with the new list which deoes not contain the product id that was selected.
+            return RedirectToAction(nameof(Index)); // To redirect back to home page we use redirect and nameof method, of an action method to avoid magic strings.
+        }
+
         public IActionResult Privacy()
         {
             return View();
