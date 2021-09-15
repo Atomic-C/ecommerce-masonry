@@ -1,6 +1,7 @@
 ﻿using ecommerce_masonry.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,10 @@ namespace ecommerce_masonry
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // This is the configuration we use.
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddHttpContextAccessor(); 
 
             services.AddSession(Options =>
@@ -52,7 +57,7 @@ namespace ecommerce_masonry
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             // Below we configure out session
             // By default only string and integer can be stored on .NETCORE. So we can add extension methods on session to configure this.

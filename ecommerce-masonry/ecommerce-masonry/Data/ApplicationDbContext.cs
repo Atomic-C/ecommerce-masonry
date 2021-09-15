@@ -1,9 +1,10 @@
 ﻿using ecommerce_masonry.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ecommerce_masonry.Data
 {
-    public class ApplicationDbContext : DbContext // Inherit attributes and methods from DbContext class
+    public class ApplicationDbContext : IdentityDbContext // Inherit attributes and methods from DbContext class
     // DbContext only exists with sql server and entity framework packages installed
 
     {
