@@ -25,7 +25,8 @@ namespace ecommerce_masonry
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // This is the configuration we use.
 
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders().AddDefaultUI() // AddDefaultTokenProviders provides the tokens when we forget the password
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddHttpContextAccessor(); 
