@@ -18,5 +18,7 @@ namespace ecommerce_masonry.Data
         public DbSet<TransportCategory> TransportCategory { get; set; } // This property will be pushed to database
 
         public DbSet<Product> Product { get; set; } // This property will be pushed to database
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; } // This property will be pushed to database
     }
 }
