@@ -90,7 +90,15 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
 
-                    await _userManager.AddToRoleAsync(user, WebConstance.AdminRole);
+                    if (User.IsInRole(WebConstance.AdminRole)) // This means admin has logged in if true 
+                    {
+                    await _userManager.AddToRoleAsync(user, WebConstance.AdminRole); // If admin has logged in and tries to create new user
+                        // It will be an admin user!!!
+                    }
+                    else
+                    {
+                    await _userManager.AddToRoleAsync(user, WebConstance.CustomerRole);
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
