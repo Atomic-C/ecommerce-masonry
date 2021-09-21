@@ -1,6 +1,7 @@
-﻿using ecommerce_masonry.Data;
+﻿using ecommerce_masonry.Data;   
 using ecommerce_masonry.Models;
 using ecommerce_masonry.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ecommerce_masonry.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;
