@@ -84,7 +84,8 @@ namespace ecommerce_masonry.Controllers
 
             ProductUserViewModel = new ProductUserViewModel()
             {
-                ApplicationUser = _db.ApplicationUser.FirstOrDefault(u => u.Id == claim.Value)
+                ApplicationUser = _db.ApplicationUser.FirstOrDefault(u => u.Id == claim.Value),
+                ProductList = productList
             };
 
             return View(ProductUserViewModel);
