@@ -3,11 +3,14 @@ using ecommerce_masonry.Models;
 using ecommerce_masonry.Models.ViewModels;
 using ecommerce_masonry.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ecommerce_masonry.Controllers
@@ -16,11 +19,13 @@ namespace ecommerce_masonry.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         [BindProperty]
         public ProductUserViewModel ProductUserViewModel { get; set; }
-        public CartController(ApplicationDbContext db)
+        public CartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -96,7 +101,28 @@ namespace ecommerce_masonry.Controllers
         [ActionName("Summary")]
         public IActionResult SummaryPost(ProductUserViewModel ProductUserViewModel)
         {
-          
+
+            var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "Inquiry.html";
+
+            var subject = "New Inquiry";
+            string htmlBody = "";
+
+            using (StreamReader sr = System.IO.File.OpenText(PathToTemplate))
+            {
+                htmlBody = sr.ReadToEnd();
+            }
+            //Name: { 0}
+            //Email: { 1}
+            //Phone: { 2}
+            //Products: { 3}
+
+            StringBuilder productListSB = new StringBuilder();
+            foreach (var item in ProductUserViewModel.ProductList)
+            {
+                productListSB.Append($" - Name: {item.Name} <span style='font-size:14px;'> (ID: {item.Id}) </span> <br />");
+            }
+
+            string messageBody = string.Format(htmlBody, ProductUserViewModel.ApplicationUser.FullUserName, ProductUserViewModel.ApplicationUser.Email, ProductUserViewModel.ApplicationUser.PhoneNumber, productListSB.ToString());
 
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
