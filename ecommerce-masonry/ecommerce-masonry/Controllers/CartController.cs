@@ -4,6 +4,7 @@ using ecommerce_masonry.Models.ViewModels;
 using ecommerce_masonry.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,12 +21,14 @@ namespace ecommerce_masonry.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IEmailSender _emailSender;
         [BindProperty]
         public ProductUserViewModel ProductUserViewModel { get; set; }
-        public CartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
+        public CartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
         {
             _db = db;
             _webHostEnvironment = webHostEnvironment;
+            _emailSender = emailSender;
         }
         public IActionResult Index()
         {
@@ -99,7 +102,7 @@ namespace ecommerce_masonry.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Summary")]
-        public IActionResult SummaryPost(ProductUserViewModel ProductUserViewModel)
+        public async Task<IActionResult> SummaryPost(ProductUserViewModel ProductUserViewModel)
         {
 
             var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "Inquiry.html";
@@ -123,6 +126,8 @@ namespace ecommerce_masonry.Controllers
             }
 
             string messageBody = string.Format(htmlBody, ProductUserViewModel.ApplicationUser.FullUserName, ProductUserViewModel.ApplicationUser.Email, ProductUserViewModel.ApplicationUser.PhoneNumber, productListSB.ToString());
+
+            await _emailSender.SendEmailAsync(WebConstance.EmailAdmin, subject, messageBody);
 
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
