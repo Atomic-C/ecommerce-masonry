@@ -60,6 +60,8 @@
                                     <ul class="list-group mb-3">
                                     @foreach (var item in Model.ProductList)
                                     {
+                                        <input type="hidden" asp-for="@item.Name" />
+                                        <input type="hidden" asp-for="@item.Id" />
                                         <li class="list-group-item d-flex justify-content-between">
                                             <div>
                                                 <h6 class="my-0">@item.Name</h6>

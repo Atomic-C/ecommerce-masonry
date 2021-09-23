@@ -91,5 +91,22 @@ namespace ecommerce_masonry.Controllers
             return View(ProductUserViewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Summary")]
+        public IActionResult SummaryPost(ProductUserViewModel ProductUserViewModel)
+        {
+          
+
+            return RedirectToAction(nameof(InquiryConfirmation));
+        } 
+        
+        public IActionResult InquiryConfirmation()
+        {
+            HttpContext.Session.Clear();
+
+            return View();
+        }
+
     }
 }
