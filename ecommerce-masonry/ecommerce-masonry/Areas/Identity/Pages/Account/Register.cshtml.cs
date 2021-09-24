@@ -118,7 +118,14 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (!User.IsInRole(WebConstance.AdminRole)) // If user is not signed in, 
+                        {
+                        await _signInManager.SignInAsync(user, isPersistent: false); // Sign him\her in. But how could this ever happen if admins can only be created by logged in admin?!?
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index");
+                        }
                         return LocalRedirect(returnUrl);
                     }
                 }
