@@ -1,6 +1,7 @@
 ﻿using ecommerce_masonry.Data;
 using ecommerce_masonry.Models;
 using ecommerce_masonry.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using System.Linq;
 
 namespace ecommerce_masonry.Controllers
 {
+    [Authorize(Roles = WebConstance.AdminRole)]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;

@@ -1,11 +1,13 @@
 ﻿using ecommerce_masonry.Data;
 using ecommerce_masonry.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace ecommerce_masonry.Controllers
 {
+    [Authorize(Roles = WebConstance.AdminRole)]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;

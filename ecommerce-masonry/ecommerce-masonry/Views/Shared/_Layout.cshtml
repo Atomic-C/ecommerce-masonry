@@ -43,6 +43,8 @@
                         @*<li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="TransportCategory" asp-action="Index">Transport Type</a>
                             </li>*@
+                        @if (User.IsInRole(WebConstance.AdminRole))
+                        {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                 Content Management
@@ -55,6 +57,7 @@
                                 <li><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a></li>
                             </ul>
                         </li>
+                        }
                         <li>
                             @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart) != null)
                             {
