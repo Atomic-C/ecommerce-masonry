@@ -19,6 +19,40 @@
             <button type="submit" class="btn btn-primary">Resend</button>
         </form>
     </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>OMG, again?</h4> @*This was added to mock the user.*@
+            <hr />
+            @{
+                if (true)
+                {
+                    <div>
+                        <p>Did you search your SPAM folder?</p>
+                        <p>Did you search your SPAM folder?</p>
+                        <p>Did you search your SPAM folder?</p>
+                        <p>Did you search your SPAM folder?</p>
+                        <p>Did you search your SPAM folder?</p>
+                        <p>Did you search your SPAM folder?</p>
+                        <p>Did you search your SPAM folder?</p>
+                        @*<p>
+                        There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                        for details on setting up this ASP.NET application to support logging in via external services.
+                    </p>*@
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl=" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
 </div>
 
 @section Scripts {
