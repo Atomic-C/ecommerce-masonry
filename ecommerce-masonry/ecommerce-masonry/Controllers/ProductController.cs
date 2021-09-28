@@ -31,17 +31,7 @@ namespace ecommerce_masonry.Controllers
         {   // With eager loading we have less database calls, as opposed to the below commented foreach block. 
             IEnumerable<Product> objectList = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType);
 
-            //ProductImageViewModel productImageViewModel = new ProductViewModel()
-            //{
-            //    Product = _db.Product.Include
-            //}
-            //IEnumerable<Product> objectList = _db.Product; // Retrieve all categories from database and store on objectList
-            //foreach (var obj in objectList) // This iterates through all of the products that we have in the objectList
-            //{
-            //    obj.Category = _db.Category.FirstOrDefault(u => u.ID == obj.CategoryId);
-            //    // each object will load the Category model based on the condition above.
-            //    obj.ApplicationType = _db.ApplicationType.FirstOrDefault(u => u.ID == obj.ApplicationTypeId);
-            //}
+
             return View(objectList);
         }
 
