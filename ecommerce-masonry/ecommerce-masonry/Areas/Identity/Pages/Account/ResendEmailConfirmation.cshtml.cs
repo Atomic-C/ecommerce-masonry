@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ecommerce_masonry.Models;
 using Microsoft.AspNetCore.Authorization;
 
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +33,8 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
-            public string Email { get; set; }
+            public string Email { get; set; } // Here we apply from userDetails
+            public string FullUserName { get; set; } // Here we apply from userDetails
         }
 
         public void OnGet()
@@ -41,6 +43,8 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
+                var userDetails = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FullUserName = Input.FullUserName}; // TODO: FIX THE FullUserName being null
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -64,7 +68,7 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
             await _emailSender.SendEmailAsync(
                 Input.Email,
                 "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                $"Dear {Input.FullUserName}, please confirm your ECMasonry account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
             ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();

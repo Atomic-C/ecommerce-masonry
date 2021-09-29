@@ -110,7 +110,7 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
                         protocol: Request.Scheme);
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Dear {Input.FullUserName}, please confirm your ECMasonry account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>. <br><br><br> If you did not register this account please ignore this email.");
+                        $"Dear {Input.FullUserName}, please confirm your ECMasonry account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here.</a> <br><br><br> If you did not register this account please ignore this email.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
