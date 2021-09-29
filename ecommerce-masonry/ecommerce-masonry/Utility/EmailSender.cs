@@ -45,7 +45,7 @@ namespace ecommerce_masonry.Utility
        "From",
        new JObject {
         {"Email", "pedro.p.sousa@sapo.pt"},
-        {"Name", "Pedro"}
+        {"Name", "ECMasonry"}
        }
       }, {
        "To",
@@ -56,7 +56,7 @@ namespace ecommerce_masonry.Utility
           email
          }, {
           "Name",
-          "DotNetMastery"
+          ""
          }
         }
        }
