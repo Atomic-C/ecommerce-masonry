@@ -8,7 +8,14 @@ MVC;
 CRUD operations;
 
 Eager loading;
+MailJet;
+Authorization;
+Summernote;
+Fontawesome;
+Validations(client and server-side);
+
+
 
 KISS;
 
-Hosted at: https://ecommerce-masonry.azurewebsites.net/
+Hosted at: https://ecmasonry.azurewebsites.net/
