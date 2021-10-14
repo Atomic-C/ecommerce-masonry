@@ -24,4 +24,8 @@
     <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Masonry_Utility\Masonry_Utility.csproj" />
+  </ItemGroup>
+
 </Project>

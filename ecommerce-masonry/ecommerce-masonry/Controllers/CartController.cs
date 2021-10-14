@@ -1,7 +1,7 @@
 ﻿using ecommerce_masonry.Data;   
 using ecommerce_masonry.Models;
 using ecommerce_masonry.Models.ViewModels;
-using ecommerce_masonry.Utility;
+using Masonry_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;

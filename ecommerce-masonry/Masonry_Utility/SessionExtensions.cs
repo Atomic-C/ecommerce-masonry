@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ecommerce_masonry.Utility
+namespace Masonry_Utility
 {
     // Below we have a session extension so we can store complex objects by serializing and deserializing them.
     public static class SessionExtensions // Since this is extension method, it has to be static

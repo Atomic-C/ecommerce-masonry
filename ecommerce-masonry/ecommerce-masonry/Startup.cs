@@ -1,5 +1,5 @@
 ﻿using ecommerce_masonry.Data;
-using ecommerce_masonry.Utility;
+using Masonry_Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ecommerce_masonry.Utility
+namespace Masonry_Utility
 {
     public class EmailSender : IEmailSender
     {

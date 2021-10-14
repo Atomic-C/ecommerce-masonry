@@ -1,4 +1,4 @@
-﻿namespace ecommerce_masonry
+﻿namespace Masonry_Utility
 {
     public static class WebConstance
     {

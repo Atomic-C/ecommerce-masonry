@@ -2789,6 +2789,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Masonry_Utility/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Masonry_Utility.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Masonry_Utility.dll": {}
+        }
       }
     }
   },
@@ -9090,11 +9100,17 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Masonry_Utility/1.0.0": {
+      "type": "project",
+      "path": "../Masonry_Utility/Masonry_Utility.csproj",
+      "msbuildProject": "../Masonry_Utility/Masonry_Utility.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Mailjet.Api >= 1.2.2",
+      "Masonry_Utility >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.10",
       "Microsoft.AspNetCore.Identity.UI >= 5.0.10",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.10",
@@ -9134,7 +9150,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj": {
+              "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
