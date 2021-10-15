@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ecommerce_masonry.Migrations
+namespace Masonry_Data_Access.Migrations
 {
     public partial class AddApplicationTypeToProduct : Migration
     {

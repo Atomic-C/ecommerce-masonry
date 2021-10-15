@@ -5,9 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ecommerce_masonry.Data;
 
-namespace ecommerce_masonry.Migrations
+namespace Masonry_Data_Access.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20210916201132_FixedApplicationUserInheritance")]

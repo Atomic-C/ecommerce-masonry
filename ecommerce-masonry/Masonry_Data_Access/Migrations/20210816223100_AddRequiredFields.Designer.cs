@@ -4,13 +4,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ecommerce_masonry.Data;
 
-namespace ecommerce_masonry.Migrations
+namespace Masonry_Data_Access.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210906210326_AddApplicationTypeIdToProduct_Rename")]
-    partial class AddApplicationTypeIdToProduct_Rename
+    [Migration("20210816223100_AddRequiredFields")]
+    partial class AddRequiredFields
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,41 +54,6 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("Masonry_Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ApplicationTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationTypeId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Product");
-                });
-
             modelBuilder.Entity("Masonry_Models.TransportCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -104,25 +68,6 @@ namespace ecommerce_masonry.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TransportCategory");
-                });
-
-            modelBuilder.Entity("Masonry_Models.Product", b =>
-                {
-                    b.HasOne("Masonry_Models.ApplicationType", "ApplicationType")
-                        .WithMany()
-                        .HasForeignKey("ApplicationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Masonry_Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationType");
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

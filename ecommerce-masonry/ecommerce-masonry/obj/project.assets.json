@@ -3244,6 +3244,23 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Masonry_Data_Access/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Masonry_Models": "1.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore": "5.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "5.0.10",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.10"
+        },
+        "compile": {
+          "bin/placeholder/Masonry_Data_Access.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Masonry_Data_Access.dll": {}
+        }
+      },
       "Masonry_Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -10049,6 +10066,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "Masonry_Data_Access/1.0.0": {
+      "type": "project",
+      "path": "../Masonry_Data_Access/Masonry_Data_Access.csproj",
+      "msbuildProject": "../Masonry_Data_Access/Masonry_Data_Access.csproj"
+    },
     "Masonry_Models/1.0.0": {
       "type": "project",
       "path": "../Masonry_Models/Masonry_Models.csproj",
@@ -10063,6 +10085,7 @@
   "projectFileDependencyGroups": {
     "net5.0": [
       "Mailjet.Api >= 1.2.2",
+      "Masonry_Data_Access >= 1.0.0",
       "Masonry_Models >= 1.0.0",
       "Masonry_Utility >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.10",
@@ -10105,6 +10128,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Data_Access\\Masonry_Data_Access.csproj": {
+              "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Data_Access\\Masonry_Data_Access.csproj"
+            },
             "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj": {
               "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj"
             },

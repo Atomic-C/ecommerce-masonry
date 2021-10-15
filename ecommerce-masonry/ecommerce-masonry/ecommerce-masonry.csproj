@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Masonry_Data_Access\Masonry_Data_Access.csproj" />
     <ProjectReference Include="..\Masonry_Models\Masonry_Models.csproj" />
     <ProjectReference Include="..\Masonry_Utility\Masonry_Utility.csproj" />
   </ItemGroup>

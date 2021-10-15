@@ -1,9 +1,9 @@
-﻿using ecommerce_masonry.Data;
-using Masonry_Models;
+﻿using Masonry_Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Masonry_Utility;
+using Masonry_Data_Access;
 
 namespace ecommerce_masonry.Controllers
 {
