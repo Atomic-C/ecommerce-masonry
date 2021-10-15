@@ -2793,6 +2793,10 @@
       "Masonry_Utility/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Mailjet.Api": "1.2.2",
+          "Microsoft.AspNetCore.Identity.UI": "5.0.10"
+        },
         "compile": {
           "bin/placeholder/Masonry_Utility.dll": {}
         },
