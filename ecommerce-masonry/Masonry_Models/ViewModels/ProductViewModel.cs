@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
-namespace ecommerce_masonry.Models.ViewModels
+namespace Masonry_Models.ViewModels
 {
     public class ProductViewModel
     {

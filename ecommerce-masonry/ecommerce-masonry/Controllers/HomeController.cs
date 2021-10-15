@@ -1,6 +1,6 @@
 ﻿using ecommerce_masonry.Data;
-using ecommerce_masonry.Models;
-using ecommerce_masonry.Models.ViewModels;
+using Masonry_Models;
+using Masonry_Models.ViewModels;
 using Masonry_Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

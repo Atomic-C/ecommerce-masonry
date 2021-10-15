@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ecommerce_masonry.Models
+namespace Masonry_Models
 {
     public class TransportCategory
     {

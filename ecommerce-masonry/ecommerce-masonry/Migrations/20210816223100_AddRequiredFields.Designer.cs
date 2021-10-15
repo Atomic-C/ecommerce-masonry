@@ -20,7 +20,7 @@ namespace ecommerce_masonry.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ecommerce_masonry.Models.ApplicationType", b =>
+            modelBuilder.Entity("Masonry_Models.ApplicationType", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -36,7 +36,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("ApplicationType");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.Category", b =>
+            modelBuilder.Entity("Masonry_Models.Category", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -55,7 +55,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.TransportCategory", b =>
+            modelBuilder.Entity("Masonry_Models.TransportCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

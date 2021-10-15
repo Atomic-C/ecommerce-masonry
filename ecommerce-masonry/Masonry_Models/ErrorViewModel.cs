@@ -1,6 +1,6 @@
 using System;
 
-namespace ecommerce_masonry.Models
+namespace Masonry_Models
 {
     public class ErrorViewModel
     {

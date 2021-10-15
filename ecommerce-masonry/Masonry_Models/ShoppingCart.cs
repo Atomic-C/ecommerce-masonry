@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ecommerce_masonry.Models
+namespace Masonry_Models
 {
     public class ShoppingCart
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ecommerce_masonry.Models.ViewModels
+namespace Masonry_Models.ViewModels
 {
     public class HomeViewModel
     {

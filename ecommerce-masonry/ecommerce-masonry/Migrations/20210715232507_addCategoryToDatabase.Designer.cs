@@ -20,7 +20,7 @@ namespace ecommerce_masonry.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ecommerce_masonry.Models.Category", b =>
+            modelBuilder.Entity("Masonry_Models.Category", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()

@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecommerce-masonry", "ecommerce-masonry\ecommerce-masonry.csproj", "{51AEF8A7-6543-4A96-9DA2-C2BCF348B728}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masonry_Utility", "Masonry_Utility\Masonry_Utility.csproj", "{9A54BB64-5160-4544-A851-C406A3C0FBDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Masonry_Utility", "Masonry_Utility\Masonry_Utility.csproj", "{9A54BB64-5160-4544-A851-C406A3C0FBDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masonry_Models", "Masonry_Models\Masonry_Models.csproj", "{8905AE83-5370-4BFB-A729-DD986DF4C4B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9A54BB64-5160-4544-A851-C406A3C0FBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A54BB64-5160-4544-A851-C406A3C0FBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A54BB64-5160-4544-A851-C406A3C0FBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8905AE83-5370-4BFB-A729-DD986DF4C4B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8905AE83-5370-4BFB-A729-DD986DF4C4B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8905AE83-5370-4BFB-A729-DD986DF4C4B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8905AE83-5370-4BFB-A729-DD986DF4C4B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿using ecommerce_masonry.Models;
+﻿using Masonry_Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

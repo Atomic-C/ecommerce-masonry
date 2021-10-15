@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ecommerce_masonry.Models
+namespace Masonry_Models
 {
     public class Category // This class represents our table. Model represents a table we want in our database.
     {

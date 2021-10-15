@@ -225,7 +225,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.ApplicationType", b =>
+            modelBuilder.Entity("Masonry_Models.ApplicationType", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -241,7 +241,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("ApplicationType");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.Category", b =>
+            modelBuilder.Entity("Masonry_Models.Category", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -260,7 +260,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.Product", b =>
+            modelBuilder.Entity("Masonry_Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -298,7 +298,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.TransportCategory", b =>
+            modelBuilder.Entity("Masonry_Models.TransportCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -314,7 +314,7 @@ namespace ecommerce_masonry.Migrations
                     b.ToTable("TransportCategory");
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Masonry_Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -375,15 +375,15 @@ namespace ecommerce_masonry.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ecommerce_masonry.Models.Product", b =>
+            modelBuilder.Entity("Masonry_Models.Product", b =>
                 {
-                    b.HasOne("ecommerce_masonry.Models.ApplicationType", "ApplicationType")
+                    b.HasOne("Masonry_Models.ApplicationType", "ApplicationType")
                         .WithMany()
                         .HasForeignKey("ApplicationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ecommerce_masonry.Models.Category", "Category")
+                    b.HasOne("Masonry_Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)

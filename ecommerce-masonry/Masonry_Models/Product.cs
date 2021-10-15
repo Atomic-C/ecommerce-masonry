@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ecommerce_masonry.Models
+namespace Masonry_Models
 {
     public class Product
     {
