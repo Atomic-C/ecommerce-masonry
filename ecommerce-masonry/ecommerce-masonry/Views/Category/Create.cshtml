@@ -5,10 +5,9 @@
     @*We can delete this ""asp-action="Create"". It's optional' because we are in Create post action and it is the same name as Create*@
     @*Form executes post method and looks for post action method of "create"*@
 
-    <div class="border p-3">
+    <div class="border p-3 bg-white">
         @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
-    </div>
-    <div class="form-group row">
+    <div class="form-group row py-2">
         <h2 class="text-info pl-3"> Create Category</h2>
         <div class="row">
             <div class="col-8">
@@ -22,7 +21,7 @@
                     </div>
 
                 </div>
-                <div class="form-group row">
+                <div class="form-group row py-2">
                     <div class="col-4">
                         <label asp-for="DisplayOrder"></label>
                     </div>
@@ -32,7 +31,7 @@
                     </div>
 
                 </div>
-                <div class="form-group row">
+                <div class="form-group row py-2">
                     <div class="col-8 offset-4 row">
 
                         <div class="col">
@@ -57,6 +56,7 @@
         </div>
     </div>
     </div>
+
 </form>
 
 @*The below section adds the client side validation*@

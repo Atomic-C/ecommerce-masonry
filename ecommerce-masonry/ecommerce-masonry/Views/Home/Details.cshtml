@@ -24,8 +24,8 @@
                                 <div class="row pl-3">
 
                                     <div class="col-12">
-                                        <span class="badge p-3 border" style="background-color:lavenderblush">@Model.Product.Category.CategoryName</span>
-                                        <span class="badge p-3 border" style="background-color:azure">@Model.Product.ApplicationType.CategoryName</span>
+                                        <span class="badge p-3 border text-dark" style="background-color:lavenderblush">@Model.Product.Category.CategoryName</span>
+                                        <span class="badge p-3 border text-dark" style="background-color:azure">@Model.Product.ApplicationType.CategoryName</span>
                                         <h3 class="text-success"></h3>
 
                                         <p class="text-secondary">@Html.Raw(Model.Product.Description)</p>
@@ -44,11 +44,11 @@
                         <div class="col-12 col-md-6 ">
                             @if (Model.IsInCart)
                             {
-                            <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;">Remove from Cart</a>
+                            <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-warning btn-square form-control btn-lg text-white" style="height:50px;">Remove from Cart</a>
                             }
                             else
                             {
-                            <button type="submit" asp-route-id="@Model.Product.Id" class="btn btn-info form-control btn-lg" style="height:50px;">Add to Cart</button>
+                            <button type="submit" asp-route-id="@Model.Product.Id" class="btn btn-info form-control btn-lg text-white" style="height:50px;">Add to Cart</button>
 
                             }
 
