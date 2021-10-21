@@ -80,7 +80,7 @@
                         <label asp-for="Product.CategoryId"></label>
                     </div>
                     <div class="col-8">
-                        <select asp-for="Product.CategoryId" asp-items="@Model.CategorySelectList" class="form-control"><option disabled selected>--Select Category--</option></select>
+                        <select asp-for="Product.CategoryId" asp-items="@Model.CategorySelectList" class="form-select"><option disabled selected>--Select Category--</option></select>
                         <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
                     </div>
 
@@ -90,7 +90,7 @@
                         <label asp-for="Product.ApplicationTypeId"></label>
                     </div>
                     <div class="col-8">
-                        <select asp-for="Product.ApplicationTypeId" asp-items="@Model.ApplicationTypeSelectList" class="form-control"><option disabled selected>--Select Application Type--</option></select>
+                        <select asp-for="Product.ApplicationTypeId" asp-items="@Model.ApplicationTypeSelectList" class="form-select"><option disabled selected>--Select Application Type--</option></select>
                         <span asp-validation-for="Product.ApplicationTypeId" class="text-danger"></span>
                     </div>
 
