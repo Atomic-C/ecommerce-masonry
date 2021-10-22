@@ -13,7 +13,7 @@ namespace Masonry_Data_Access.Repository.IRepository
 
         IEnumerable<T> GetAll(
             Expression<Func<T, bool>> filter = null, 
-            Func<IQueryable<T>, IOrderedEnumerable<T>> orderBy = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = null,
             bool isTracking = true
             );
