@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Masonry_Data_Access.Repository.IRepository
 {
-    interface ICategoryRepository : IRepository<Category>
+    public interface ICategoryRepository : IRepository<Category>
     {
         void Update(Category obj);
     }

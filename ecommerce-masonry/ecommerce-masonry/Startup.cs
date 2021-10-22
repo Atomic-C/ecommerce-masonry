@@ -1,4 +1,6 @@
 ﻿using Masonry_Data_Access;
+using Masonry_Data_Access.Repository;
+using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +44,7 @@ namespace ecommerce_masonry
                 Options.Cookie.HttpOnly = true;
                 Options.Cookie.IsEssential = true;  
             });
+            services.AddScoped<ICategoryRepository, CategoryRepository>(); // We have to add this so we do not get InvalidOperationException: Unable to resolve service for type
             services.AddControllersWithViews();
         }
 

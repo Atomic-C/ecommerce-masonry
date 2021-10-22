@@ -5,25 +5,26 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Masonry_Utility;
 using Masonry_Data_Access;
+using Masonry_Data_Access.Repository.IRepository;
 
 namespace ecommerce_masonry.Controllers
 {
     [Authorize(Roles = WebConstance.AdminRole)]
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _catRepo;
 
-        public CategoryController(ApplicationDbContext db) // We populate the property above using dependency injection
+        public CategoryController(ICategoryRepository catRepo) // We populate the property above using dependency injection
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
-            _db = db;
+            _catRepo = catRepo;
         }
 
         // More on DI: https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objectList = _db.Category; // Retrieve all categories from database and store on objectList
+            IEnumerable<Category> objectList = _catRepo.GetAll(); ; // Retrieve all categories from database and store on objectList
             return View(objectList);
         }
 
@@ -40,8 +41,8 @@ namespace ecommerce_masonry.Controllers
         {
             if (ModelState.IsValid) // This checks if all of the rules I defined in model are valid, if so, enter condition.
             {
-                _db.Category.Add(obj); // So this adds to the database.
-                _db.SaveChanges(); // But this is what actually saves it?!?
+                _catRepo.Add(obj); // So this adds to the database.
+                _catRepo.Save(); // But this is what actually saves it?!?
 
                 Debug.WriteLine(ModelState.IsValid);
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
@@ -58,7 +59,7 @@ namespace ecommerce_masonry.Controllers
                 return NotFound(); // Return not found because it's invalid.
             }
 
-            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+            var obj = _catRepo.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
 
             if (obj == null) // Check this invalid condition, we don't want it. (If not found)
             {
@@ -74,8 +75,8 @@ namespace ecommerce_masonry.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Category.Update(obj); // So this Updates the database.
-                _db.SaveChanges(); // But this is what actually saves it?!?
+                _catRepo.Update(obj); // So this Updates the database.
+                _catRepo.Save(); // But this is what actually saves it?!?
 
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
@@ -101,7 +102,7 @@ namespace ecommerce_masonry.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+            var obj = _catRepo.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
 
             if (obj == null) // Check this invalid condition, we don't want it. (If not found)
             {
@@ -115,13 +116,13 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+            var obj = _catRepo.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
             if (obj == null) // If this is null then we have nothing to delete.
             {
                 return NotFound();
             }
-            _db.Category.Remove(obj); // So this Removes the database.
-            _db.SaveChanges(); // But this is what actually saves it?!?
+            _catRepo.Remove(obj); // So this Removes the database.
+            _catRepo.Save(); // But this is what actually saves it?!?
 
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }
