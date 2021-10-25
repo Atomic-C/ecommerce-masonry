@@ -45,7 +45,9 @@ namespace ecommerce_masonry
                 Options.Cookie.IsEssential = true;  
             });
             services.AddScoped<ICategoryRepository, CategoryRepository>(); // We have to add this so we do not get InvalidOperationException: Unable to resolve service for type
-            services.AddControllersWithViews();
+                // Scoped Lifetime is also useful when ever we deal with the database, when registering, because scope stays for one request
+                // Transient would create a new object all the time.
+            services.AddControllersWithViews(); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

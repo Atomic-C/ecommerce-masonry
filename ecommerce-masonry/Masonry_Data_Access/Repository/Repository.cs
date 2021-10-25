@@ -18,11 +18,12 @@ namespace Masonry_Data_Access.Repository
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
             _db = db;
-            this.dbSet = _db.Set<T>();
+            this.dbSet = _db.Set<T>(); // This is how we set out generic class T with dbSet
         }
         public void Add(T entity)
         {
-            dbSet.Add(entity);
+            dbSet.Add(entity); // We can directly use dbSet since we have set it up in our constructor
+            // dbSet will have all the methods that we use in productcontroller when we select product.dot
         }
 
         public T Find(int id)
