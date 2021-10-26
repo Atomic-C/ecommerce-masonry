@@ -11,7 +11,7 @@ namespace Masonry_Data_Access.Repository
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
 
-    private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _db;
         public CategoryRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
@@ -23,7 +23,7 @@ namespace Masonry_Data_Access.Repository
                 {
                  objFromDb.CategoryName = obj.CategoryName;
                  objFromDb.DisplayOrder = obj.DisplayOrder;
-
+                 // We don't need to save changes here because we already save them inside our generic repository
                 }
         }
     }
