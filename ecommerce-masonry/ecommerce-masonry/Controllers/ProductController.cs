@@ -1,4 +1,5 @@
 ﻿using Masonry_Data_Access;
+using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
@@ -17,12 +18,12 @@ namespace ecommerce_masonry.Controllers
     [Authorize(Roles = WebConstance.AdminRole)]
     public class ProductController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IProductRepository _prodRepo;
         private readonly IWebHostEnvironment _webHostEnvironment; // ASP.NET CORE Built in dependency to use our web constance
-        public ProductController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment) // We populate the property above using dependency injection
+        public ProductController(IProductRepository prodRepo, IWebHostEnvironment webHostEnvironment) // We populate the property above using dependency injection
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
-            _db = db;
+            _prodRepo = prodRepo;
             _webHostEnvironment = webHostEnvironment; // We get IWebHostEnvironment via dependency injection?!?
         }
 
@@ -30,7 +31,7 @@ namespace ecommerce_masonry.Controllers
 
         public IActionResult Index()
         {   // With eager loading we have less database calls, as opposed to the below commented foreach block. 
-            IEnumerable<Product> objectList = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType);
+            IEnumerable<Product> objectList = _prodRepo.GetAll(includeProperties:"Category,ApplicationType");
 
 
             return View(objectList);
@@ -43,16 +44,8 @@ namespace ecommerce_masonry.Controllers
             ProductViewModel productViewModel = new ProductViewModel()
             {
                 Product = new Product(),
-                CategorySelectList = _db.Category.Select(i => new SelectListItem
-                {
-                    Text = i.CategoryName,
-                    Value = i.ID.ToString()
-                }),
-                ApplicationTypeSelectList = _db.ApplicationType.Select(i => new SelectListItem
-                {
-                    Text = i.CategoryName,
-                    Value = i.ID.ToString()
-                })
+                CategorySelectList = _prodRepo.GetAllDropDownList(WebConstance.CategoryName),
+                ApplicationTypeSelectList = _prodRepo.GetAllDropDownList(WebConstance.ApplicationTypeName)
             };
 
             if (id == null) // If it's null, it's for CREATE :D
@@ -61,7 +54,7 @@ namespace ecommerce_masonry.Controllers
             }
             else
             {
-                productViewModel.Product = _db.Product.Find(id); // This means id is not null and we need to retrieve product from database and pass it to the view just like we did with editing of category.
+                productViewModel.Product = _prodRepo.Find(id.GetValueOrDefault()); // This means id is not null and we need to retrieve product from database and pass it to the view just like we did with editing of category.
                 if (productViewModel == null)
                 {
                     return NotFound();
@@ -94,14 +87,14 @@ namespace ecommerce_masonry.Controllers
 
                     productViewModel.Product.Image = filename + extension; // Here we're storing the new guid name for file and extension. Not the path!!
 
-                    _db.Product.Add(productViewModel.Product); // Here we add the product
+                    _prodRepo.Add(productViewModel.Product); // Here we add the product
 
                 }
                 else
                 {
                     // Update 
                     // Since we're retriving this only to get the name of the old image, so we don't need to track it
-                    var objFromDb = _db.Product.AsNoTracking().FirstOrDefault(u => u.Id == productViewModel.Product.Id);
+                    var objFromDb = _prodRepo.FirstOrDefault(u => u.Id == productViewModel.Product.Id, isTracking:false);
 
                     if (files.Count > 0)
                     {
@@ -126,23 +119,13 @@ namespace ecommerce_masonry.Controllers
                     {
                         productViewModel.Product.Image = objFromDb.Image; // Image was not updated and we keep it as is
                     }
-                    _db.Product.Update(productViewModel.Product);
+                    _prodRepo.Update(productViewModel.Product);
                 }
-                _db.SaveChanges(); // This is what actually saves it after we update.
+                _prodRepo.Save(); // This is what actually saves it after we update.
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-            // The below method works so we get the category list even if modelstate is false.
-            productViewModel.CategorySelectList = _db.Category.Select(i => new SelectListItem
-            {
-                Text = i.CategoryName,
-                Value = i.ID.ToString()
-            });
-            // The below method works so we get the ApplicationType list even if modelstate is false.
-            productViewModel.ApplicationTypeSelectList = _db.ApplicationType.Select(i => new SelectListItem
-            {
-                Text = i.CategoryName,
-                Value = i.ID.ToString()
-            });
+            productViewModel.CategorySelectList = _prodRepo.GetAllDropDownList(WebConstance.CategoryName);
+            productViewModel.ApplicationTypeSelectList = _prodRepo.GetAllDropDownList(WebConstance.ApplicationTypeName);
             return View(productViewModel); // We need the view model that was originally passed above.
         }
 
@@ -156,10 +139,10 @@ namespace ecommerce_masonry.Controllers
             }
             // Below is eager loading concept.
             //This is a great way to save resources because only one query gets executed
-            Product product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType).FirstOrDefault(u => u.Id == id);
+            Product product = _prodRepo.FirstOrDefault(u=>u.Id==id,includeProperties:"Category,ApplicationType");
             // product.Category = _db.Category.Find(product.CategoryId);
 
-            var obj = _db.Category.Find(id); // We retrieve category from the database if valid.
+            var obj = _prodRepo.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
 
             if (product == null) // Check this invalid condition, we don't want it. (If not found)
             {
@@ -176,7 +159,7 @@ namespace ecommerce_masonry.Controllers
 
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            var obj = _db.Product.Find(id); // We retrieve category from the database if valid.
+            var obj = _prodRepo.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
             if (obj == null)
             {
                 return NotFound();
@@ -192,8 +175,8 @@ namespace ecommerce_masonry.Controllers
                 System.IO.File.Delete(oldFile);
             }
 
-            _db.Product.Remove(obj); // So this Removes the database.
-            _db.SaveChanges(); // But this is what actually saves it?!?
+            _prodRepo.Remove(obj); // So this Removes the database.
+            _prodRepo.Save(); // But this is what actually saves it?!?
 
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }

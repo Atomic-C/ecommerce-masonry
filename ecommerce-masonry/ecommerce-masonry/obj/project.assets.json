@@ -3249,6 +3249,7 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "Masonry_Models": "1.0.0",
+          "Masonry_Utility": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore": "5.0.10",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.10",

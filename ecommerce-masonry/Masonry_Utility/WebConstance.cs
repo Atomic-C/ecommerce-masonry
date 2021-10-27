@@ -9,5 +9,10 @@
         public const string CustomerRole = "Customer";
 
         public const string EmailAdmin = "pedro.p.sousa@sapo.pt";
+
+        public const string CategoryName = "Category";
+        public const string ApplicationTypeName = "ApplicationType";
+
+
     }
 }

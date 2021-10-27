@@ -1,5 +1,7 @@
 ﻿using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
+using Masonry_Utility;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,27 @@ namespace Masonry_Data_Access.Repository
         public ProductRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public IEnumerable<SelectListItem> GetAllDropDownList(string obj)
+        {
+            if (obj == WebConstance.CategoryName)
+            {
+               return _db.Category.Select(i => new SelectListItem
+                {
+                    Text = i.CategoryName,
+                    Value = i.ID.ToString()
+                });
+            }
+            if (obj == WebConstance.ApplicationTypeName)
+            {
+               return _db.ApplicationType.Select(i => new SelectListItem
+                {
+                    Text = i.CategoryName,
+                    Value = i.ID.ToString()
+                });
+            }
+            return null; // If neither conditions are true that is!
         }
 
         public void Update(Product obj)

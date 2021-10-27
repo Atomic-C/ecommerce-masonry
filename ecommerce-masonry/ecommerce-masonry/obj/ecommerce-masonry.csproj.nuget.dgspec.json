@@ -139,6 +139,9 @@
             "projectReferences": {
               "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj": {
                 "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj"
+              },
+              "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj": {
+                "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj"
               }
             }
           }

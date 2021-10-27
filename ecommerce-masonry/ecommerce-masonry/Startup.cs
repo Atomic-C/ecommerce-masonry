@@ -48,6 +48,7 @@ namespace ecommerce_masonry
               // Scoped Lifetime is also useful when ever we deal with the database, when registering, because scope stays for one request
                                                                            // Transient would create a new object all the time.
             services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllersWithViews(); 
         }
 

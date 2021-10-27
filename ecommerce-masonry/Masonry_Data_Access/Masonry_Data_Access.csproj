@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Masonry_Models\Masonry_Models.csproj" />
+    <ProjectReference Include="..\Masonry_Utility\Masonry_Utility.csproj" />
   </ItemGroup>
 
 </Project>
