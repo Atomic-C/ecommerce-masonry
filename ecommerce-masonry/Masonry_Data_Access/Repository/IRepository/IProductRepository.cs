@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Masonry_Data_Access.Repository.IRepository
 {
-    public interface IApplicationTypeRepository : IRepository<ApplicationType>
+    public interface IProductRepository : IRepository<Product>
     {
-        void Update(ApplicationType obj);
+        void Update(Product obj);
     }
 }
