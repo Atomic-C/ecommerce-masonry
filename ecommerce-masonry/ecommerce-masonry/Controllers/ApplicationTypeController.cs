@@ -4,23 +4,24 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Masonry_Utility;
 using Masonry_Data_Access;
+using Masonry_Data_Access.Repository.IRepository;
 
 namespace ecommerce_masonry.Controllers
 {
     [Authorize(Roles = WebConstance.AdminRole)]
     public class ApplicationTypeController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IApplicationTypeRepository _appType;
 
-        public ApplicationTypeController(ApplicationDbContext db) // We populate the property above using dependency injection
+        public ApplicationTypeController(IApplicationTypeRepository appType) // We populate the property above using dependency injection
         {
             // This object will have an instance of the dbcontext that dependency injection creates and passes to us through the constructor.
-            _db = db;
+            _appType = appType;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<ApplicationType> objectList = _db.ApplicationType;
+            IEnumerable<ApplicationType> objectList = _appType.GetAll();
             return View(objectList);
         }
 
@@ -37,8 +38,8 @@ namespace ecommerce_masonry.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.ApplicationType.Add(obj);
-                _db.SaveChanges();
+                _appType.Add(obj);
+                _appType.Save();
 
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
@@ -54,7 +55,7 @@ namespace ecommerce_masonry.Controllers
                 return NotFound();
             }
 
-            var obj = _db.ApplicationType.Find(id); // We retrieve category from the database if valid.
+            var obj = _appType.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
 
             if (obj == null) // Check this invalid condition, we don't want it. (If not found)
             {
@@ -70,8 +71,8 @@ namespace ecommerce_masonry.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.ApplicationType.Update(obj); // So this Updates the database.
-                _db.SaveChanges(); // But this is what actually saves it?!?
+                _appType.Update(obj); // So this Updates the database.
+                _appType.Save(); // But this is what actually saves it?!?
 
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
@@ -86,7 +87,7 @@ namespace ecommerce_masonry.Controllers
                 return NotFound();
             }
 
-            var obj = _db.ApplicationType.Find(id); // We retrieve category from the database if valid.
+            var obj = _appType.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
 
             if (obj == null) // Check this invalid condition, we don't want it. (If not found)
             {
@@ -100,13 +101,13 @@ namespace ecommerce_masonry.Controllers
         [ValidateAntiForgeryToken] // This is for validation purposes - built in mechanic
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.ApplicationType.Find(id); // We retrieve category from the database if valid.
+            var obj = _appType.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.ApplicationType.Remove(obj); // So this Removes the database.
-            _db.SaveChanges(); // But this is what actually saves it?!?
+            _appType.Remove(obj); // So this Removes the database.
+            _appType.Save(); // But this is what actually saves it?!?
 
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }
