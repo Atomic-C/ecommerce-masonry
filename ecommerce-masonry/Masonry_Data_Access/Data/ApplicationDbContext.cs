@@ -20,5 +20,8 @@ namespace Masonry_Data_Access
         public DbSet<Product> Product { get; set; } // This property will be pushed to database
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; } // This property will be pushed to database
+
+        public DbSet<InquiryHeader> InquiryHeaders { get; set; } // This property will be pushed to database
+        public DbSet<InquiryDetails> InquiryDetails { get; set; } // This property will be pushed to database
     }
 }

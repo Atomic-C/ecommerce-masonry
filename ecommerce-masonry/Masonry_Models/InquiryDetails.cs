@@ -14,12 +14,12 @@ namespace Masonry_Models
         public int MyProperty { get; set; }
 
         [Required]
-        public string InquiryHeaderId { get; set; } // We need a FK reference for our Inquiry Header
+        public int InquiryHeaderId { get; set; } // We need a FK reference for our Inquiry Header
         [ForeignKey("InquiryHeaderId")]
         public InquiryHeader InquiryHeader { get; set; }
 
         [Required]
-        public string ProductId { get; set; } // We need a FK reference for our Inquiry Header
+        public int ProductId { get; set; } // We need a FK reference for our Inquiry Header
         [ForeignKey("ProductId")]
         public Product Product { get; set; }
     }
