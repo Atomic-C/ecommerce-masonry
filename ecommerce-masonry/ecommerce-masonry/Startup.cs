@@ -49,6 +49,8 @@ namespace ecommerce_masonry
                                                                            // Transient would create a new object all the time.
             services.AddScoped<IApplicationTypeRepository, ApplicationTypeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
+            services.AddScoped<IInquiryDetailsRepository, InquiryDetailsRepository>();
             services.AddControllersWithViews(); 
         }
 
