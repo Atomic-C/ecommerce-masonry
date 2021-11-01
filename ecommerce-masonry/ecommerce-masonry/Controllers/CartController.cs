@@ -1,4 +1,5 @@
 ﻿using Masonry_Data_Access;
+using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
@@ -19,14 +20,25 @@ namespace ecommerce_masonry.Controllers
     [Authorize]
     public class CartController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        //private readonly ApplicationDbContext _db;
+        private readonly IProductRepository _prodRepo;
+        private readonly IApplicationUserRepository _applicationUserRepo;
+        private readonly IInquiryHeaderRepository _inquiryHeaderRepo;
+        private readonly IInquiryDetailsRepository _inquiryDetailsRepo;
+
+
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IEmailSender _emailSender;
         [BindProperty]
         public ProductUserViewModel ProductUserViewModel { get; set; }
-        public CartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
+        public CartController(IProductRepository productRepo, IApplicationUserRepository applicationUserRepo, IInquiryHeaderRepository inquiryHeaderRepo, IInquiryDetailsRepository inquiryDetailsRepo, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
         {
-            _db = db;
+            //_db = db;
+            _prodRepo = productRepo;
+            _applicationUserRepo = applicationUserRepo;
+            _inquiryHeaderRepo = inquiryHeaderRepo;
+            _inquiryDetailsRepo = inquiryDetailsRepo;
+
             _webHostEnvironment = webHostEnvironment;
             _emailSender = emailSender;
         }
@@ -41,7 +53,8 @@ namespace ecommerce_masonry.Controllers
             }
 
             List<int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList(); // Here we find out all distinct products in cart using projections  .Select(i => i.ProductId)
-            IEnumerable<Product> productList = _db.Product.Where(u => prodInCart.Contains(u.Id));
+            IEnumerable<Product> productList = _prodRepo.GetAll(u => prodInCart.Contains(u.Id));
+            //IEnumerable<Product> productList = _db.Product.Where(u => prodInCart.Contains(u.Id));
 
             return View(productList);
         }
@@ -88,7 +101,7 @@ namespace ecommerce_masonry.Controllers
             }
 
             List<int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList(); // Here we find out all distinct products in cart using projections  .Select(i => i.ProductId)
-            IEnumerable<Product> productList = _db.Product.Where(u => prodInCart.Contains(u.Id));
+            IEnumerable<Product> productList = _prodRepo.GetAll(u => prodInCart.Contains(u.Id));
 
             ProductUserViewModel = new ProductUserViewModel()
             {
