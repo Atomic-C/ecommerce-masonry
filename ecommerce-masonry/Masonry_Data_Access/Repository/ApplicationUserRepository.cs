@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Masonry_Data_Access.Repository
 {
-    public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUser
+    public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
     {
         private readonly ApplicationDbContext _db;
 
