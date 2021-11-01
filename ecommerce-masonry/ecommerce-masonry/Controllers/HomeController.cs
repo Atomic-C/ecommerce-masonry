@@ -1,4 +1,5 @@
 ﻿using Masonry_Data_Access;
+using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
@@ -17,21 +18,25 @@ namespace ecommerce_masonry.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _db;
+        private readonly IProductRepository _productRepo;
+        private readonly ICategoryRepository _categoryRepo;
 
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(ILogger<HomeController> logger, IProductRepository prodRepo, ICategoryRepository categoryRepo)
         {
             _logger = logger;
-            _db = db;
+            _productRepo = prodRepo;
+            _categoryRepo = categoryRepo;
         }
 
         public IActionResult Index()
         {
             HomeViewModel homeViewModel = new HomeViewModel() // Here we populate both properties for our HomeViewModel!!
             {
-                Products = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType),
-                Categories = _db.Category
+                Products = _productRepo.GetAll(includeProperties: "Category,ApplicationType"),
+                //Products = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType),
+                Categories = _categoryRepo.GetAll(includeProperties: "Category")
+                //Categories = _db.Category
             };
             return View(homeViewModel); // If we don't assign homeViewModel to our view we get a System.NullReferenceException: 'Object reference not set to an instance of an object.'
         }
@@ -49,7 +54,7 @@ namespace ecommerce_masonry.Controllers
 
             DetailsViewModel DetailsViewModel = new DetailsViewModel()
             {
-                Product = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType).Where(u => u.Id == id).FirstOrDefault(),
+                Product = _productRepo.FirstOrDefault(u=>u.Id== id, includeProperties: "Category,ApplicationType"),
                 IsInCart = false
             };
 
