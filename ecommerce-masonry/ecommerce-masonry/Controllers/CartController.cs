@@ -117,6 +117,8 @@ namespace ecommerce_masonry.Controllers
         [ActionName("Summary")]
         public async Task<IActionResult> SummaryPost(ProductUserViewModel ProductUserViewModel)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
             var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "Inquiry.html";
 
@@ -141,6 +143,30 @@ namespace ecommerce_masonry.Controllers
             string messageBody = string.Format(htmlBody, ProductUserViewModel.ApplicationUser.FullUserName, ProductUserViewModel.ApplicationUser.Email, ProductUserViewModel.ApplicationUser.PhoneNumber, productListSB.ToString());
 
             await _emailSender.SendEmailAsync(WebConstance.EmailAdmin, subject, messageBody);
+
+            InquiryHeader inquiryHeader = new InquiryHeader() // check ;
+            {
+                ApplicationUserId = claim.Value,
+                FullName = ProductUserViewModel.ApplicationUser.FullUserName,
+                PhoneNumber = ProductUserViewModel.ApplicationUser.PhoneNumber,
+                Email = ProductUserViewModel.ApplicationUser.Email,
+                InquiryDate = DateTime.Now
+                
+            };
+
+            _inquiryHeaderRepo.Add(inquiryHeader);
+            _inquiryHeaderRepo.Save();
+
+            foreach (var item in ProductUserViewModel.ProductList)
+            {
+                InquiryDetails inquiryDetail = new InquiryDetails()
+                {
+                    InquiryHeaderId = inquiryHeader.Id,
+                    ProductId = item.Id
+                };
+                _inquiryDetailsRepo.Add(inquiryDetail);
+                _inquiryDetailsRepo.Save();
+            }
 
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
