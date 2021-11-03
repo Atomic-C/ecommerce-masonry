@@ -21,7 +21,7 @@ namespace ecommerce_masonry.Controllers
 
         public IActionResult Index()
         {
-
+            return View();
         }
     }
 }

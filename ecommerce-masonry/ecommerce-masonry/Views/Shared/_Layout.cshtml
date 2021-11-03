@@ -44,17 +44,17 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         @*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
-                            </li>*@
+            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="ApplicationType" asp-action="Index">Application Type</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+        </li>*@
                         @*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="TransportCategory" asp-action="Index">Transport Type</a>
-                            </li>*@
+            <a class="nav-link text-dark" asp-area="" asp-controller="TransportCategory" asp-action="Index">Transport Type</a>
+        </li>*@
                         @if (User.IsInRole(WebConstance.AdminRole))
                         {
                             <li class="nav-item dropdown">
@@ -67,6 +67,14 @@
                                     <li><a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Index">Product</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Create Admin User</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    Order/Inquiry Management
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Inquiry" asp-action="Index">Inquiry</a></li>
                                 </ul>
                             </li>
                         }
