@@ -35,7 +35,7 @@ namespace ecommerce_masonry.Controllers
             {
                 Products = _productRepo.GetAll(includeProperties: "Category,ApplicationType"),
                 //Products = _db.Product.Include(u => u.Category).Include(u => u.ApplicationType),
-                Categories = _categoryRepo.GetAll(includeProperties: "Category")
+                Categories = _categoryRepo.GetAll()
                 //Categories = _db.Category
             };
             return View(homeViewModel); // If we don't assign homeViewModel to our view we get a System.NullReferenceException: 'Object reference not set to an instance of an object.'
