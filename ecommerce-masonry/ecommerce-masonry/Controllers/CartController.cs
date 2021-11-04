@@ -165,8 +165,8 @@ namespace ecommerce_masonry.Controllers
                     ProductId = item.Id
                 };
                 _inquiryDetailsRepo.Add(inquiryDetail);
-                _inquiryDetailsRepo.Save();
             }
+                _inquiryDetailsRepo.Save();
 
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
