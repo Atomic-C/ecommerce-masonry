@@ -23,5 +23,12 @@ namespace ecommerce_masonry.Controllers
         {
             return View();
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetInquiryList()
+        {
+            return Json(new { data = _inquiryHeaderRepo.GetAll() });
+        }
+        #endregion
     }
 }
