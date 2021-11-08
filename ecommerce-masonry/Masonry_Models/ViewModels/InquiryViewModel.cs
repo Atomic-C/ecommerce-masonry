@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Masonry_Models.ViewModels
 {
     public class InquiryViewModel
     {
-        public InquiryHeader inquiryHeader { get; set; }
-        public InquiryDetails inquiryDetails { get; set; }
+        public InquiryHeader InquiryHeader { get; set; }
+        public IEnumerable<InquiryDetails> InquiryDetails { get; set; }
     }
 }

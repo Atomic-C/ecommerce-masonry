@@ -31,8 +31,8 @@ namespace ecommerce_masonry.Controllers
         {
             InquiryViewModel = new InquiryViewModel()
             {
-                inquiryHeader = _inquiryHeaderRepo.FirstOrDefault(u => u.Id == id),
-                inquiryDetails = (InquiryDetails)_inquiryDetailsRepo.GetAll(u => u.InquiryHeaderId == id, includeProperties: "Product")
+                InquiryHeader = _inquiryHeaderRepo.FirstOrDefault(u => u.Id == id),
+                InquiryDetails = _inquiryDetailsRepo.GetAll(u => u.InquiryHeaderId == id,includeProperties: "Product")
                 // Find a way to get rid of CAST
             };
             return View(InquiryViewModel);
