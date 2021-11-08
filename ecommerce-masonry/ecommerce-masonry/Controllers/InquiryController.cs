@@ -36,6 +36,29 @@ namespace ecommerce_masonry.Controllers
             };
             return View(InquiryViewModel);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DetailsPost()
+        {
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            InquiryViewModel.InquiryDetails = _inquiryDetailsRepo.GetAll(u => u.InquiryHeaderId == InquiryViewModel.InquiryHeader.Id);
+
+            foreach (var item in InquiryViewModel.InquiryDetails)
+            {
+                ShoppingCart shoppingCart = new ShoppingCart()
+                {
+                    ProductId = item.ProductId
+                };
+                shoppingCartList.Add(shoppingCart);
+                HttpContext.Session.Clear();
+                HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
+                HttpContext.Session.Set(WebConstance.SessionInquiryId, InquiryViewModel.InquiryHeader.Id);
+                return RedirectToAction("Index", "Cart"); // Redirect to Index action inside cart controller
+            }
+
+            return View(InquiryViewModel);
+        }
         #region API CALLS
         [HttpGet]
         public IActionResult GetInquiryList()
