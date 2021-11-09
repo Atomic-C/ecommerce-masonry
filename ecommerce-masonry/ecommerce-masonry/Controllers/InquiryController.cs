@@ -9,6 +9,7 @@ using Masonry_Models.ViewModels;
 
 namespace ecommerce_masonry.Controllers
 {
+    [Authorize(Roles = WebConstance.AdminRole)] // We add this so that only admin can have access to inquiry control. Comment this to find more!
     public class InquiryController : Controller
     {
     private readonly IInquiryHeaderRepository _inquiryHeaderRepo;
