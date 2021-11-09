@@ -39,7 +39,7 @@ namespace ecommerce_masonry.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DetailsPost()
+        public IActionResult Details()
         {
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
             InquiryViewModel.InquiryDetails = _inquiryDetailsRepo.GetAll(u => u.InquiryHeaderId == InquiryViewModel.InquiryHeader.Id);
@@ -51,13 +51,13 @@ namespace ecommerce_masonry.Controllers
                     ProductId = item.ProductId
                 };
                 shoppingCartList.Add(shoppingCart);
+            }
                 HttpContext.Session.Clear();
                 HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
                 HttpContext.Session.Set(WebConstance.SessionInquiryId, InquiryViewModel.InquiryHeader.Id);
+                // If above line is zero session was set normally in homepage. If not, it was set using inquiry button.
                 return RedirectToAction("Index", "Cart"); // Redirect to Index action inside cart controller
-            }
 
-            return View(InquiryViewModel);
         }
         #region API CALLS
         [HttpGet]
