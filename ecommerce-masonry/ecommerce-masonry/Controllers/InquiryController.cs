@@ -59,6 +59,21 @@ namespace ecommerce_masonry.Controllers
                 return RedirectToAction("Index", "Cart"); // Redirect to Index action inside cart controller
 
         }
+
+            [HttpPost]
+            public IActionResult Delete()
+            {
+                InquiryHeader inquiryHeader = _inquiryHeaderRepo.FirstOrDefault(u => u.Id == InquiryViewModel.InquiryHeader.Id);
+                IEnumerable<InquiryDetails> inquiryDetails = _inquiryDetailsRepo.GetAll(u => u.InquiryHeaderId == InquiryViewModel.InquiryHeader.Id);
+
+            _inquiryHeaderRepo.Remove(inquiryHeader);
+            _inquiryDetailsRepo.RemoveRange(inquiryDetails); // I had to add a RemoveRange on IRepository for this...
+            _inquiryDetailsRepo.Save();
+            _inquiryHeaderRepo.Save();
+
+            return RedirectToAction(nameof(Index)); ;
+        }
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetInquiryList()
