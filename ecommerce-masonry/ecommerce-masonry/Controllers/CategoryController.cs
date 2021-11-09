@@ -43,11 +43,12 @@ namespace ecommerce_masonry.Controllers
             {
                 _catRepo.Add(obj); // So this adds to the database.
                 _catRepo.Save(); // But this is what actually saves it?!?
-
-                Debug.WriteLine(ModelState.IsValid);
+                TempData[WebConstance.Success] = "Category was created successfully!";
+                //Debug.WriteLine(ModelState.IsValid);
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-            Debug.WriteLine(ModelState.IsValid);
+                TempData[WebConstance.Success] = "Category was created successfully!";
+            //Debug.WriteLine(ModelState.IsValid);
             return View(obj); // If not valid re return back to the view to display error message.
         }
 
