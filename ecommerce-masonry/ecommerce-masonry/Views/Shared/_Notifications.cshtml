@@ -1,0 +1,21 @@
+﻿@using Masonry_Utility@*To use web constance*@
+
+@if (TempData[WebConstance.Success] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+    toastr.success('@TempData[WebConstance.Success]')
+    </script>
+
+}
+
+@if (TempData[WebConstance.Error] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+    toastr.error('@TempData[WebConstance.Error]')
+    </script>
+
+}
