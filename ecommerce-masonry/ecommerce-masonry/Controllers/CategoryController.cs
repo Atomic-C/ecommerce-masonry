@@ -47,7 +47,7 @@ namespace ecommerce_masonry.Controllers
                 //Debug.WriteLine(ModelState.IsValid);
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-                TempData[WebConstance.Success] = "Category was created successfully!";
+                TempData[WebConstance.Error] = "Error while creating category!";
             //Debug.WriteLine(ModelState.IsValid);
             return View(obj); // If not valid re return back to the view to display error message.
         }
@@ -78,9 +78,10 @@ namespace ecommerce_masonry.Controllers
             {
                 _catRepo.Update(obj); // So this Updates the database.
                 _catRepo.Save(); // But this is what actually saves it?!?
-
+                TempData[WebConstance.Success] = "Updated successfully!";
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
+                TempData[WebConstance.Error] = "Error while updating!";
             return View(obj);
         }
         /*
@@ -120,11 +121,13 @@ namespace ecommerce_masonry.Controllers
             var obj = _catRepo.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
             if (obj == null) // If this is null then we have nothing to delete.
             {
+                TempData[WebConstance.Error] = "Error while deleting!";
                 return NotFound();
             }
             _catRepo.Remove(obj); // So this Removes the database.
             _catRepo.Save(); // But this is what actually saves it?!?
 
+                TempData[WebConstance.Success] = "Deleted successfully!";
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }
     }
