@@ -1,10 +1,9 @@
-﻿using Masonry_Models;
+﻿using Masonry_Data_Access.Repository.IRepository;
+using Masonry_Models;
+using Masonry_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Masonry_Utility;
-using Masonry_Data_Access;
-using Masonry_Data_Access.Repository.IRepository;
 
 namespace ecommerce_masonry.Controllers
 {
@@ -40,10 +39,10 @@ namespace ecommerce_masonry.Controllers
             {
                 _appType.Add(obj);
                 _appType.Save();
-
+                TempData[WebConstance.Success] = "Application created successfully!";
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-
+                TempData[WebConstance.Error] = "Error while deleting application!";
             return View(obj);
         }
 
@@ -73,9 +72,10 @@ namespace ecommerce_masonry.Controllers
             {
                 _appType.Update(obj); // So this Updates the database.
                 _appType.Save(); // But this is what actually saves it?!?
-
+                TempData[WebConstance.Success] = "Updated successfully!";
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
+                TempData[WebConstance.Error] = "Error while updating";
             return View(obj);
         }
 
@@ -104,11 +104,13 @@ namespace ecommerce_masonry.Controllers
             var obj = _appType.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
             if (obj == null)
             {
+                TempData[WebConstance.Success] = "Deleted successfully!";
                 return NotFound();
             }
             _appType.Remove(obj); // So this Removes the database.
             _appType.Save(); // But this is what actually saves it?!?
 
+                TempData[WebConstance.Success] = "Error while deleting!";
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }
     }
