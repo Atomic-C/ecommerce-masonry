@@ -10099,23 +10099,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pedro\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\pedro.sousa\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry.csproj",
+      "projectUniqueName": "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry.csproj",
       "projectName": "ecommerce-masonry",
-      "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry.csproj",
-      "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\obj\\",
+      "projectPath": "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry.csproj",
+      "packagesPath": "C:\\Users\\pedro.sousa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pedro.sousa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10129,14 +10130,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Data_Access\\Masonry_Data_Access.csproj": {
-              "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Data_Access\\Masonry_Data_Access.csproj"
+            "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Data_Access\\Masonry_Data_Access.csproj": {
+              "projectPath": "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Data_Access\\Masonry_Data_Access.csproj"
             },
-            "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj": {
-              "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj"
+            "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj": {
+              "projectPath": "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Models\\Masonry_Models.csproj"
             },
-            "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj": {
-              "projectPath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj"
+            "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj": {
+              "projectPath": "C:\\Users\\pedro.sousa\\Desktop\\GIT STUFF\\ecommerce-masonry\\ecommerce-masonry\\Masonry_Utility\\Masonry_Utility.csproj"
             }
           }
         }
@@ -10204,7 +10205,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
