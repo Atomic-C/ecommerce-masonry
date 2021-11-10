@@ -72,7 +72,7 @@ namespace ecommerce_masonry.Controllers
             shoppingCartList.Remove(shoppingCartList.FirstOrDefault(u=>u.ProductId == id)); // First or default to retrive object based on ID
 
             HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
-
+            TempData[WebConstance.Success] = "Successfully removed from cart!";
             return RedirectToAction(nameof(Index));
         }
 
@@ -167,7 +167,7 @@ namespace ecommerce_masonry.Controllers
                 _inquiryDetailsRepo.Add(inquiryDetail);
             }
                 _inquiryDetailsRepo.Save();
-
+            TempData[WebConstance.Success] = "Successful inquiry!";
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
         
