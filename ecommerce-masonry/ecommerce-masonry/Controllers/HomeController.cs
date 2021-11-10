@@ -81,6 +81,7 @@ namespace ecommerce_masonry.Controllers
             }
             shoppingCartList.Add(new ShoppingCart { ProductId = id }); // If empty we directly add to it
             HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
+            TempData[WebConstance.Success] = "Successfully added to cart!";
             return RedirectToAction(nameof(Index)); // To redirect back to home page we use redirect and nameof method, of an action method to avoid magic strings.
         }
 
@@ -103,6 +104,7 @@ namespace ecommerce_masonry.Controllers
 
             //shoppingCartList.Add(new ShoppingCart { ProductId = id }); // If empty we directly add to it
             HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList); // We set the shopping cart again with the new list which deoes not contain the product id that was selected.
+            TempData[WebConstance.Success] = "Successfully removed from cart!";
             return RedirectToAction(nameof(Index)); // To redirect back to home page we use redirect and nameof method, of an action method to avoid magic strings.
         }
 
