@@ -57,7 +57,8 @@ namespace ecommerce_masonry.Controllers
                 HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
                 HttpContext.Session.Set(WebConstance.SessionInquiryId, InquiryViewModel.InquiryHeader.Id);
                 // If above line is zero session was set normally in homepage. If not, it was set using inquiry button.
-                return RedirectToAction("Index", "Cart"); // Redirect to Index action inside cart controller
+                TempData[WebConstance.Success] = "Successfully converted to cart!";
+            return RedirectToAction("Index", "Cart"); // Redirect to Index action inside cart controller
 
         }
 
@@ -72,6 +73,7 @@ namespace ecommerce_masonry.Controllers
             _inquiryDetailsRepo.Save();
             _inquiryHeaderRepo.Save();
 
+                TempData[WebConstance.Success] = "Successfully deleted from cart!";
             return RedirectToAction(nameof(Index)); ;
         }
 
