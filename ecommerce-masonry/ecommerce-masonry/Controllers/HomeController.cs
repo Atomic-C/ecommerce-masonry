@@ -70,7 +70,7 @@ namespace ecommerce_masonry.Controllers
         }
         
         [HttpPost,ActionName("Details")]
-        public IActionResult DetailsPost(int id)
+        public IActionResult DetailsPost(int id, DetailsViewModel detailsViewModel)
         {
 
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
@@ -79,7 +79,7 @@ namespace ecommerce_masonry.Controllers
                 // Here we know session exists, we want to retrive that session and add an item to it
                 shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstance.SessionCart); // If there's something, it gts retrived 
             }
-            shoppingCartList.Add(new ShoppingCart { ProductId = id }); // If empty we directly add to it
+            shoppingCartList.Add(new ShoppingCart { ProductId = id, Sqft = detailsViewModel.Product.TempSqft }); // If empty we directly add to it
             HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
             TempData[WebConstance.Success] = "Successfully added to cart!";
             return RedirectToAction(nameof(Index)); // To redirect back to home page we use redirect and nameof method, of an action method to avoid magic strings.
