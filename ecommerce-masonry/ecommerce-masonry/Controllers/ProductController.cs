@@ -88,6 +88,7 @@ namespace ecommerce_masonry.Controllers
                     productViewModel.Product.Image = filename + extension; // Here we're storing the new guid name for file and extension. Not the path!!
 
                     _prodRepo.Add(productViewModel.Product); // Here we add the product
+                    TempData[WebConstance.Success] = "Successfully created!";
 
                 }
                 else
@@ -122,6 +123,7 @@ namespace ecommerce_masonry.Controllers
                     _prodRepo.Update(productViewModel.Product);
                 }
                 _prodRepo.Save(); // This is what actually saves it after we update.
+                TempData[WebConstance.Success] = "Successfully updated!"; 
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
             productViewModel.CategorySelectList = _prodRepo.GetAllDropDownList(WebConstance.CategoryName);
@@ -177,7 +179,7 @@ namespace ecommerce_masonry.Controllers
 
             _prodRepo.Remove(obj); // So this Removes the database.
             _prodRepo.Save(); // But this is what actually saves it?!?
-
+            TempData[WebConstance.Success] = "Successfully deleted!";
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }
     }
