@@ -73,7 +73,7 @@ namespace ecommerce_masonry.Controllers
             _inquiryDetailsRepo.Save();
             _inquiryHeaderRepo.Save();
 
-                TempData[WebConstance.Success] = "Successfully deleted from cart!";
+                TempData[WebConstance.Success] = "Successfully deleted inquiry list!";
             return RedirectToAction(nameof(Index)); ;
         }
 

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Masonry_Utility;
 
 namespace ecommerce_masonry.Areas.Identity.Pages.Account
 {
@@ -85,6 +86,7 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    TempData[WebConstance.Success] = "User logged in."; 
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
