@@ -1,4 +1,5 @@
-﻿@model Masonry_Models.ViewModels.DetailsViewModel 
+﻿@model Masonry_Models.ViewModels.DetailsViewModel
+ 
 
 
 <div class="">
@@ -30,7 +31,23 @@
 
                                         <p class="text-secondary">@Html.Raw(Model.Product.Description)</p>
                                     </div>
-
+                                    @if (User.IsInRole(@Masonry_Utility.WebConstance.AdminRole))
+                                    {
+                                        <div class="col-12">
+                                            Sqft:
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.IsInCart)
+                                            {
+                                                <input asp-for="@Model.Product.TempSqft" disabled class="form-control" />
+                                            }
+                                            else
+                                            {
+                                                <input asp-for="@Model.Product.TempSqft" class="form-control" />
+                                            }
+                                            <span asp-validation-for="@Model.Product.TempSqft" class="text-danger"></span>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
