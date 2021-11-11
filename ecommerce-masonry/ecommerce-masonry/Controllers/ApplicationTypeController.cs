@@ -42,7 +42,7 @@ namespace ecommerce_masonry.Controllers
                 TempData[WebConstance.Success] = "Application created successfully!";
                 return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
             }
-                TempData[WebConstance.Error] = "Error while deleting application!";
+                TempData[WebConstance.Error] = "Error while creating application!";
             return View(obj);
         }
 
@@ -104,13 +104,13 @@ namespace ecommerce_masonry.Controllers
             var obj = _appType.Find(id.GetValueOrDefault()); // We retrieve category from the database if valid.
             if (obj == null)
             {
-                TempData[WebConstance.Success] = "Deleted successfully!";
+                TempData[WebConstance.Error] = "Error while deleting!";
                 return NotFound();
             }
             _appType.Remove(obj); // So this Removes the database.
             _appType.Save(); // But this is what actually saves it?!?
 
-                TempData[WebConstance.Success] = "Error while deleting!";
+                TempData[WebConstance.Success] = "Deleted successfully!";
             return RedirectToAction("Index"); // We're in the same controller we don't need to define controller name here
         }
     }
