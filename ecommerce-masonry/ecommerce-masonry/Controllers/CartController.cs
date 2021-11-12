@@ -53,8 +53,16 @@ namespace ecommerce_masonry.Controllers
             }
 
             List<int> prodInCart = shoppingCartList.Select(i => i.ProductId).ToList(); // Here we find out all distinct products in cart using projections  .Select(i => i.ProductId)
-            IEnumerable<Product> productList = _prodRepo.GetAll(u => prodInCart.Contains(u.Id));
+            IEnumerable<Product> productListTemp = _prodRepo.GetAll(u => prodInCart.Contains(u.Id));
+            IList<Product> productList = new List<Product>();
             //IEnumerable<Product> productList = _db.Product.Where(u => prodInCart.Contains(u.Id));
+
+            foreach (var item in shoppingCartList)
+            {
+                Product prodTemp = productListTemp.FirstOrDefault(u => u.Id == item.ProductId);
+                prodTemp.TempSqft = item.Sqft;
+                productList.Add(prodTemp);
+            }
 
             return View(productList);
         }
