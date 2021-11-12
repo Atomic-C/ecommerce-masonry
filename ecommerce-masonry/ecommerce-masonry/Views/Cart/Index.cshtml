@@ -22,39 +22,89 @@
                                 <div class="row" style="color:#821f3d">
                                     <div class="col-lg-2">
                                     </div>
-                                    <div class="col-12 col-lg-7">
-                                        Product Details
-                                    </div>
+                                    @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
+                                    {
+                                        <div class="col-12 col-lg-3">
+                                            Product Details
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-12 col-lg-7">
+                                            Product Details
+                                        </div>
+                                    }
                                     <div class="col-12 col-lg-2">
                                         Price per sqft
                                     </div>
+                                    @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
+                                    {
+                                        <div class="col-6 col-lg-2">
+                                            Sqft
+                                        </div>
+                                        <div class="col-6 col-lg-2">
+                                            Total Price
+                                        </div>
+                                    }
                                     <div class="col-6 col-sm-4 col-lg-1">
                                     </div>
                                 </div>
                             </div>
 
                             <hr />
+                            @{ 
+                                double orderTotal = 0.0;
+                            }
                             @foreach (var item in Model)
                             {
-                            <div class="row h-100">
-                                <div class="col-4 col-md-2 text-center py-2">
-                                    <img src="@Masonry_Utility.WebConstance.imagePath@item.Image" class="rounded" width="100%" />
+                        <div class="row h-100">
+                            <div class="col-4 col-md-2 text-center py-2">
+                                <img src="@Masonry_Utility.WebConstance.imagePath@item.Image" class="rounded" width="100%" />
+                            </div>
+                            @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
+                            {
+                                <div class="col-8 col-lg-3">
+                                    <h5>@item.Name</h5>
+                                    <div style="font-size:11px;">@item.ShortDesc</div>
                                 </div>
+                            }
+                            else
+                            {
                                 <div class="col-8 col-lg-7">
                                     <h5>@item.Name</h5>
                                     <div style="font-size:11px;">@item.ShortDesc</div>
                                 </div>
+                            }
+                            <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                <span style="font-size:17px;"> $@item.Price</span>/ sqft
+
+                            </div>
+                            @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
+                            {
+                                <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                    <input type="text" asp-for="@item.TempSqft" class="form-control" />
+                                </div>
                                 <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                    <span style="font-size:17px;"> $@item.Price</span>/ sqft
+                                    <span style="font-size:17px;"> $@(item.Price * item.TempSqft)</span>
 
                                 </div>
-                                <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                    <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-outline-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>
+                            }
+                            <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
+                                <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </div>
+                        </div>
+                                orderTotal += item.Price * item.TempSqft;
                             <hr />
+                            }
+                            @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
+                            {
+                                <div class="row">
+                                    <div class="col-12 ptext-right pr-4" style="color:#ff0000">
+                                       Order Total : @string.Format("{0:c}", orderTotal);
+                                    </div>
+                                </div>
                             }
                         </div>
                         <div class="card-footer">
