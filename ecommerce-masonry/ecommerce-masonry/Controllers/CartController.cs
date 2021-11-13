@@ -186,5 +186,17 @@ namespace ecommerce_masonry.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateCart(IEnumerable<Product> ProdList)
+        {
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            foreach (Product item in ProdList)
+            {
+                shoppingCartList.Add(new ShoppingCart { ProductId=item.Id,Sqft=item.TempSqft });
+            }
+            HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
