@@ -87,10 +87,15 @@ namespace ecommerce_masonry.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Index")]
-        public IActionResult IndexPost()
+        public IActionResult IndexPost(IEnumerable<Product> ProdList)
         {
 
-
+            List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
+            foreach (Product item in ProdList)
+            {
+                shoppingCartList.Add(new ShoppingCart { ProductId = item.Id, Sqft = item.TempSqft });
+            }
+            HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
             return RedirectToAction(nameof(Summary));
         }
         
