@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product> 
+﻿@model List<Product> 
 
 @if (Model.Count() > 0)
 {
@@ -55,47 +55,49 @@
                             @{ 
                                 double orderTotal = 0.0;
                             }
-                            @foreach (var item in Model)
+                            @* For some reason we need to use a for loop here, but why??? *@
+                            @for (int i = 0; i < Model.Count(); i++)
                             {
+                                <input hidden asp-for="@Model[i].Id" />
                         <div class="row h-100">
                             <div class="col-4 col-md-2 text-center py-2">
-                                <img src="@Masonry_Utility.WebConstance.imagePath@item.Image" class="rounded" width="100%" />
+                                <img src="@Masonry_Utility.WebConstance.imagePath@Model[i].Image" class="rounded" width="100%" />
                             </div>
                             @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
                             {
                                 <div class="col-8 col-lg-3">
-                                    <h5>@item.Name</h5>
-                                    <div style="font-size:11px;">@item.ShortDesc</div>
+                                    <h5>@Model[i].Name</h5>
+                                    <div style="font-size:11px;">@Model[i].ShortDesc</div>
                                 </div>
                             }
                             else
                             {
                                 <div class="col-8 col-lg-7">
-                                    <h5>@item.Name</h5>
-                                    <div style="font-size:11px;">@item.ShortDesc</div>
+                                    <h5>@Model[i].Name</h5>
+                                    <div style="font-size:11px;">@Model[i].ShortDesc</div>
                                 </div>
                             }
                             <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                <span style="font-size:17px;"> $@item.Price</span>/ sqft
+                                <span style="font-size:17px;"> $@Model[i].Price</span>/ sqft
 
                             </div>
                             @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
                             {
                                 <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                    <input type="text" asp-for="@item.TempSqft" class="form-control" />
+                                    <input type="text" asp-for="@Model[i].TempSqft" class="form-control" />
                                 </div>
                                 <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                    <span style="font-size:17px;"> $@(item.Price * item.TempSqft)</span>
+                                    <span style="font-size:17px;"> $@(Model[i].Price * Model[i].TempSqft)</span>
 
                                 </div>
                             }
                             <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                <a asp-action="Remove" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                <a asp-action="Remove" asp-route-id="@Model[i].Id" class="btn btn-outline-danger">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
                         </div>
-                                orderTotal += item.Price * item.TempSqft;
+                                orderTotal += Model[i].Price * Model[i].TempSqft;
                             <hr />
                             }
                             @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
