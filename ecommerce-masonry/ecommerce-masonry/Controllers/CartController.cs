@@ -101,9 +101,38 @@ namespace ecommerce_masonry.Controllers
         
         public IActionResult Summary()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            //var userId = User.FindFirstValue(ClaimTypes.Name);
+            ApplicationUser applicationUser;
+
+            if (User.IsInRole(WebConstance.AdminRole))
+            {
+                if (HttpContext.Session.Get<int>(WebConstance.SessionInquiryId) != 0)
+                {
+                    //cart has been loaded using an imnquiry
+                    InquiryHeader inquiryHeader = _inquiryHeaderRepo.FirstOrDefault(u => u.Id == HttpContext.Session.Get<int>(WebConstance.SessionInquiryId)); // retrive inquiry from database
+
+                    applicationUser = new ApplicationUser()
+                    {
+                        Email = inquiryHeader.Email,
+                        FullUserName = inquiryHeader.FullName,
+                        PhoneNumber = inquiryHeader.PhoneNumber
+
+                    };
+                }
+                else
+                {
+                    applicationUser = new ApplicationUser(); 
+                    // This means user is admin user and is placing order for a costumert hat walked in store 
+                }
+            }
+            else
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                //var userId = User.FindFirstValue(ClaimTypes.Name);
+                applicationUser = _applicationUserRepo.FirstOrDefault(u=>u.Id == claim.Value);
+            }
+
+
 
             List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
 
@@ -118,7 +147,7 @@ namespace ecommerce_masonry.Controllers
 
             ProductUserViewModel = new ProductUserViewModel()
             {
-                ApplicationUser = _applicationUserRepo.FirstOrDefault(u => u.Id == claim.Value),
+                ApplicationUser = applicationUser,
                 ProductList = productList.ToList()
             };
 
