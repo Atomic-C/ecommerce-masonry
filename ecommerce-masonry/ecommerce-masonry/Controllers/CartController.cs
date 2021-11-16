@@ -148,8 +148,18 @@ namespace ecommerce_masonry.Controllers
             ProductUserViewModel = new ProductUserViewModel()
             {
                 ApplicationUser = applicationUser,
-                ProductList = productList.ToList()
+                //ProductList = productList.ToList()
             };
+
+            //    We do not have sqft inside productList, but we do inside shoppingCartList
+            //    So foreach item in it,  we retrive sqft
+            foreach (var item in shoppingCartList)
+            {
+                Product prodTemp = _prodRepo.FirstOrDefault(u => u.Id == item.ProductId); // We retrive product
+                prodTemp.TempSqft = item.Sqft; // we set product sqft here
+                ProductUserViewModel.ProductList.Add(prodTemp); // We add the product to the list here.
+
+            }
 
             return View(ProductUserViewModel);
         }
