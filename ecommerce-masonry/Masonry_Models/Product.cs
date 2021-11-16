@@ -33,7 +33,7 @@ namespace Masonry_Models
         public int ApplicationTypeId { get; set; }
         [ForeignKey("ApplicationTypeId")]
         public virtual ApplicationType ApplicationType { get; set; }
-        [NotMapped]
+        [NotMapped] // We use NotMapped because we don't want to add this to the database and only use this property in our view!
         [Range(1,10000)]
         public int TempSqft { get; set; }
     }
