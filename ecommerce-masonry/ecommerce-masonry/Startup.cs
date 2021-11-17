@@ -52,6 +52,8 @@ namespace ecommerce_masonry
             services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
             services.AddScoped<IInquiryDetailsRepository, InquiryDetailsRepository>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
             services.AddControllersWithViews(); 
         }
 

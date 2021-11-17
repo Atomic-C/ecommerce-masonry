@@ -23,5 +23,8 @@ namespace Masonry_Data_Access
 
         public DbSet<InquiryHeader> InquiryHeaders { get; set; } // This property will be pushed to database
         public DbSet<InquiryDetails> InquiryDetails { get; set; } // This property will be pushed to database
+        public DbSet<OrderHeader> OrderHeader { get; set; } // This property will be pushed to database
+        public DbSet<OrderDetail> OrderDetail { get; set; } // This property will be pushed to database
     }
+    // Whev we create a new model, this is what we do before migrations, we add hem as properties here.
 }
