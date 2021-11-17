@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Masonry_Data_Access.Repository
 {
-    public class OrderHeaderRepository : Repository<InquiryHeader>, IInquiryHeaderRepository
+    public class OrderHeaderRepository : Repository<OrderHeader>, IOrderHeaderRepository
     {
         private readonly ApplicationDbContext _db;
 
@@ -21,9 +21,9 @@ namespace Masonry_Data_Access.Repository
 
         
 
-        public void Update(InquiryHeader obj)
+        public void Update(OrderHeader obj)
         {
-            _db.InquiryHeaders.Update(obj);
+            _db.OrderHeader.Update(obj);
         }
 
 

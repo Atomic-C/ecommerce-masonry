@@ -25,13 +25,15 @@ namespace ecommerce_masonry.Controllers
         private readonly IApplicationUserRepository _applicationUserRepo;
         private readonly IInquiryHeaderRepository _inquiryHeaderRepo;
         private readonly IInquiryDetailsRepository _inquiryDetailsRepo;
+        private readonly IOrderDetailRepository _orderDetailRepo;
+        private readonly IOrderHeaderRepository _orderHeaderRepo;
 
 
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IEmailSender _emailSender;
         [BindProperty]
         public ProductUserViewModel ProductUserViewModel { get; set; }
-        public CartController(IProductRepository productRepo, IApplicationUserRepository applicationUserRepo, IInquiryHeaderRepository inquiryHeaderRepo, IInquiryDetailsRepository inquiryDetailsRepo, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
+        public CartController(IProductRepository productRepo, IApplicationUserRepository applicationUserRepo, IInquiryHeaderRepository inquiryHeaderRepo, IInquiryDetailsRepository inquiryDetailsRepo, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender, IOrderDetailRepository orderDetailRepo, IOrderHeaderRepository orderHeaderRepo)
         {
             //_db = db;
             _prodRepo = productRepo;
@@ -41,6 +43,8 @@ namespace ecommerce_masonry.Controllers
 
             _webHostEnvironment = webHostEnvironment;
             _emailSender = emailSender;
+            _orderDetailRepo = orderDetailRepo;
+            _orderHeaderRepo = orderHeaderRepo;
         }
         public IActionResult Index()
         {
@@ -171,6 +175,49 @@ namespace ecommerce_masonry.Controllers
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            // Below we separare the logic inside the SummaryPost, for both Order and Inquiry cases, for admins and users respectively
+            if (User.IsInRole(WebConstance.AdminRole))
+            { // This means we need to create an order
+                double orderTotal = 0.0;
+
+                foreach (var item in ProductUserViewModel.ProductList)
+                {
+                    orderTotal = item.Price * item.TempSqft; // we calculate total price here
+                }
+                OrderHeader orderHeader = new OrderHeader()
+                {
+                    CreatedByUserId = claim.Value,
+                    FinalOrderTotal = orderTotal,
+                    City = ProductUserViewModel.ApplicationUser.City,
+                    StreetAddress = ProductUserViewModel.ApplicationUser.StreetAddress,
+                    State = ProductUserViewModel.ApplicationUser.State,
+                    PostalCode = ProductUserViewModel.ApplicationUser.PostalCode,
+                    FullName = ProductUserViewModel.ApplicationUser.FullUserName,
+                    Email = ProductUserViewModel.ApplicationUser.Email,
+                    PhoneNumber = ProductUserViewModel.ApplicationUser.PhoneNumber,
+                    OrderDate = DateTime.Now,
+                    OrderStatus = WebConstance.StatusPending
+
+                };
+                _orderHeaderRepo.Add(orderHeader);
+                _orderHeaderRepo.Save();
+
+                foreach (var item in ProductUserViewModel.ProductList)
+                {
+                    OrderDetail orderDetail = new OrderDetail()
+                    {
+                        OrderHeaderId = orderHeader.Id,
+                        PricePerSqFt = item.Price,
+                        Sqft = item.TempSqft,
+                        ProductId = item.Id
+                    };
+                    _orderDetailRepo.Add(orderDetail);
+                }
+                _orderDetailRepo.Save();
+                return RedirectToAction(nameof(InquiryConfirmation), new { id=orderHeader.Id });
+            }
+            else
+            { // We need to create an Inquiry
 
             var PathToTemplate = _webHostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "Inquiry.html";
 
@@ -220,6 +267,9 @@ namespace ecommerce_masonry.Controllers
             }
                 _inquiryDetailsRepo.Save();
             TempData[WebConstance.Success] = "Successful inquiry!";
+
+            }
+
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
         
