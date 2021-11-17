@@ -38,7 +38,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-9">
-                                        <input asp-for="@Model.ApplicationUser.PhoneNumber" type="text" class="form-control" />
+                                        <input asp-for="@Model.ApplicationUser.PhoneNumber" required type="text" class="form-control" />
                                         <span asp-validation-for="@Model.ApplicationUser.PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-9">
-                                        <input asp-for="@Model.ApplicationUser.Email" type="text" class="form-control" />
+                                        <input asp-for="@Model.ApplicationUser.Email" required type="text" class="form-control" />
                                         <span asp-validation-for="@Model.ApplicationUser.Email" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -140,9 +140,18 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-12 col-md-5 offset-md-7">
-                            <button type="submit" class="btn btn-primary form-control">Submit Inquiry</button>
-                        </div>
+                        @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
+                        {
+                            <div class="col-12 col-md-5 offset-md-7">
+                                <button class="btn btn-success form-control" id="submit-button">Submit Order</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12 col-md-5 offset-md-7">
+                                <button type="submit" class="btn btn-primary form-control">Submit Inquiry</button>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
