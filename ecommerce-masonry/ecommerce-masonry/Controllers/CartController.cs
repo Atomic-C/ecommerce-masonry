@@ -273,11 +273,12 @@ namespace ecommerce_masonry.Controllers
             return RedirectToAction(nameof(InquiryConfirmation));
         } 
         
-        public IActionResult InquiryConfirmation()
+        public IActionResult InquiryConfirmation(int id = 0)
         {
+            OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == id); // We retrive orderheader id from the repo.
             HttpContext.Session.Clear();
 
-            return View();
+            return View(orderHeader);
         }
 
         [HttpPost]
