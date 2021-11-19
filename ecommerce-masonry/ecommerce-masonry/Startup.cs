@@ -2,6 +2,7 @@
 using Masonry_Data_Access.Repository;
 using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Utility;
+using Masonry_Utility.BrainTree;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -44,6 +45,12 @@ namespace ecommerce_masonry
                 Options.Cookie.HttpOnly = true;
                 Options.Cookie.IsEssential = true;  
             });
+            services.Configure<BrainTreeSettings>(Configuration.GetSection("BrainTree")); // We add the json settings in BrainTreeSettings class
+
+            // TODO: Try using GetSection for mailjet when you have time, so we register everything in our container here :D
+
+            services.AddSingleton<IBrainTreeGate, BrainTreeGate>(); // We register interface for gateway!
+
             services.AddScoped<ICategoryRepository, CategoryRepository>(); // We have to add this so we do not get InvalidOperationException: Unable to resolve service for type
               // Scoped Lifetime is also useful when ever we deal with the database, when registering, because scope stays for one request
                                                                            // Transient would create a new object all the time.
