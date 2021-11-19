@@ -304,6 +304,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Braintree": {
+              "target": "Package",
+              "version": "[5.10.0, )"
+            },
             "Mailjet.Api": {
               "target": "Package",
               "version": "[1.2.2, )"
