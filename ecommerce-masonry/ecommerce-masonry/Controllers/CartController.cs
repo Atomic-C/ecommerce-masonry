@@ -3,6 +3,7 @@ using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
+using Masonry_Utility.BrainTree;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -27,13 +28,14 @@ namespace ecommerce_masonry.Controllers
         private readonly IInquiryDetailsRepository _inquiryDetailsRepo;
         private readonly IOrderDetailRepository _orderDetailRepo;
         private readonly IOrderHeaderRepository _orderHeaderRepo;
+        private readonly IBrainTreeGate _brain;
 
 
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IEmailSender _emailSender;
         [BindProperty]
         public ProductUserViewModel ProductUserViewModel { get; set; }
-        public CartController(IProductRepository productRepo, IApplicationUserRepository applicationUserRepo, IInquiryHeaderRepository inquiryHeaderRepo, IInquiryDetailsRepository inquiryDetailsRepo, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender, IOrderDetailRepository orderDetailRepo, IOrderHeaderRepository orderHeaderRepo)
+        public CartController(IProductRepository productRepo, IApplicationUserRepository applicationUserRepo, IInquiryHeaderRepository inquiryHeaderRepo, IInquiryDetailsRepository inquiryDetailsRepo, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender, IOrderDetailRepository orderDetailRepo, IOrderHeaderRepository orderHeaderRepo, IBrainTreeGate brain)
         {
             //_db = db;
             _prodRepo = productRepo;
@@ -45,6 +47,7 @@ namespace ecommerce_masonry.Controllers
             _emailSender = emailSender;
             _orderDetailRepo = orderDetailRepo;
             _orderHeaderRepo = orderHeaderRepo;
+            _brain = brain;
         }
         public IActionResult Index()
         {
@@ -127,6 +130,11 @@ namespace ecommerce_masonry.Controllers
                     applicationUser = new ApplicationUser(); 
                     // This means user is admin user and is placing order for a costumert hat walked in store 
                 }
+                // Here we get client token.
+                // Only if the user is admin user.
+                var gateway = _brain.GetGateWay(); // we call getgateway because if it does not exist it is created remember?
+                var clientToken = gateway.ClientToken.Generate(); // This is provided by braintree team, and gets us the client token.
+                ViewBag.ClientToken = clientToken; // I don't like viewbag, but we only need it in this page. Usually I use VewModels.
             }
             else
             {
