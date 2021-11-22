@@ -240,7 +240,7 @@ namespace ecommerce_masonry.Controllers
                 var gateway = _brain.GetGateWay();
                 Result<Transaction> result = gateway.Transaction.Sale(request);
 
-                if (result.Target.ProcessorResponseText=="Approved")
+                if (result.Target.ProcessorResponseText== "Approved")
                 {
                     orderHeader.TransactionId = result.Target.Id;
                     orderHeader.OrderStatus = WebConstance.StatusApproved;

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "l+wb+GkhYJA9IpLG8K1yCOXp7hYlO6Qs3vBqsG4PSWsYPx3eX7NdhB6HChrtrW/cCpY2sF/4b6XIlf0ps/iUlQ==",
+  "dgSpecHash": "6yW3/m7DjB3kIjQhgNxXfEmEWUQu2kBXJAZgLcQaeekrGAHZQKbH360D+6eWP5Sm5/gJThcZ915m3jCGgXdR9w==",
   "success": true,
   "projectFilePath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\pedro\\.nuget\\packages\\braintree\\5.10.0\\braintree.5.10.0.nupkg.sha512",
+    "C:\\Users\\pedro\\.nuget\\packages\\braintree\\4.17.0\\braintree.4.17.0.nupkg.sha512",
     "C:\\Users\\pedro\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\pedro\\.nuget\\packages\\mailjet.api\\1.2.2\\mailjet.api.1.2.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",

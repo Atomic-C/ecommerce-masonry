@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net5.0": {
-      "Braintree/5.10.0": {
+      "Braintree/4.17.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "9.0.1",
@@ -3334,7 +3334,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "Braintree": "5.10.0",
+          "Braintree": "4.17.0",
           "Mailjet.Api": "1.2.2",
           "Microsoft.AspNetCore.Identity.UI": "5.0.10"
         },
@@ -3348,16 +3348,17 @@
     }
   },
   "libraries": {
-    "Braintree/5.10.0": {
-      "sha512": "eJ1fOKUSx2QtZUZ2ZwLTv7ieImuxO4RHulChQav4Y7v7cdH5LoXiiA6NTQsHcQe97y7SPcWT/hFF/wcaiY5lmA==",
+    "Braintree/4.17.0": {
+      "sha512": "szJcnihSv2Hu35hmomKc5LjE+xmZDAq/X6yd6ljaVMACk7AoY5QrLtJqz/d9GK4hxMFpfbCMuuRgJmqD4cP3sQ==",
       "type": "package",
-      "path": "braintree/5.10.0",
+      "path": "braintree/4.17.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "braintree.5.10.0.nupkg.sha512",
+        "braintree.4.17.0.nupkg.sha512",
         "braintree.nuspec",
         "lib/net452/Braintree.dll",
+        "lib/netstandard1.3/Braintree.dll",
         "lib/netstandard2.0/Braintree.dll"
       ]
     },

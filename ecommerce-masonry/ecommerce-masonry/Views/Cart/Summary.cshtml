@@ -188,8 +188,10 @@
             form.addEventListener('submit', function () {
                 event.preventDefault();
                 //Add the nonce to the form and submit
-                document.querySelector('#nonce').value = payload.nonce;
-                form.submit();
+                instance.requestPaymentMethod(function (err, payload) {
+                    document.querySelector('#nonce').value = payload.nonce;
+                    form.submit();
+                });
             });
         });
     </script>
