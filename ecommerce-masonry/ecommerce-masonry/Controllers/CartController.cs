@@ -1,4 +1,5 @@
-﻿using Masonry_Data_Access;
+﻿using Braintree;
+using Masonry_Data_Access;
 using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
 using Masonry_Models.ViewModels;
@@ -6,6 +7,7 @@ using Masonry_Utility;
 using Masonry_Utility.BrainTree;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -179,7 +181,7 @@ namespace ecommerce_masonry.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Summary")]
-        public async Task<IActionResult> SummaryPost(ProductUserViewModel ProductUserViewModel)
+        public async Task<IActionResult> SummaryPost(IFormCollection collection, ProductUserViewModel ProductUserViewModel)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
@@ -222,6 +224,32 @@ namespace ecommerce_masonry.Controllers
                     _orderDetailRepo.Add(orderDetail);
                 }
                 _orderDetailRepo.Save();
+                string nonceFromTheClient = collection["payment_method_nonce"];
+
+                var request = new TransactionRequest
+                {
+                    Amount = Convert.ToDecimal(orderHeader.FinalOrderTotal),
+                    PaymentMethodNonce = nonceFromTheClient,
+                    OrderId = orderHeader.Id.ToString(),
+                    Options = new TransactionOptionsRequest
+                    {
+                        SubmitForSettlement = true
+                    }
+                };
+
+                var gateway = _brain.GetGateWay();
+                Result<Transaction> result = gateway.Transaction.Sale(request);
+
+                if (result.Target.ProcessorResponseText=="Approved")
+                {
+                    orderHeader.TransactionId = result.Target.Id;
+                    orderHeader.OrderStatus = WebConstance.StatusApproved;
+                }
+                else
+                {
+                    orderHeader.OrderStatus = WebConstance.StatusCanceled;
+                }
+                _orderHeaderRepo.Save();
                 return RedirectToAction(nameof(InquiryConfirmation), new { id=orderHeader.Id });
             }
             else
