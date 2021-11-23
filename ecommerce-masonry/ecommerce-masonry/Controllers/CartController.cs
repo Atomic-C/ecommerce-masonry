@@ -329,5 +329,14 @@ namespace ecommerce_masonry.Controllers
             HttpContext.Session.Set(WebConstance.SessionCart, shoppingCartList);
             return RedirectToAction(nameof(Index));
         }
+
+        // Below is the action method to delete ALL items from the cart
+        public IActionResult RemoveAll()
+        {
+            HttpContext.Session.Clear();
+            TempData[WebConstance.Success] = "Successfully emptied cart!";
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
