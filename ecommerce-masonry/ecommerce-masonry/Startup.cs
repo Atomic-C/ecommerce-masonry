@@ -61,6 +61,13 @@ namespace ecommerce_masonry
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
+
+            services.AddAuthentication().AddFacebook(Options =>
+            {
+                Options.AppId = "663849507936752";
+                Options.AppSecret = "660ed1285c8780f0206f42a64a11384c";
+            });
+
             services.AddControllersWithViews(); 
         }
 

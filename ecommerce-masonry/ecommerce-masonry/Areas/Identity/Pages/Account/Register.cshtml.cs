@@ -65,7 +65,9 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
             public string FullUserName { get; set; }
+            [Required]
             public string PhoneNumber { get; set; }
         }
 
