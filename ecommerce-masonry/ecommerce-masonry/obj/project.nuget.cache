@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mX2LPzBPjJBL5DLjsfa+q4FVRKJN9h4x6wRCI0fPPJrbnHoMyTGZlp3jyoirtW9eoopXL2t8KYgc2+RMLvsA3w==",
+  "dgSpecHash": "HJLALmAQRs96U0MPcY6P5V/XAcViE6T/PHlqz0lJ13Jfhpv2qfaMI+1RfZUslDcDujyMeyximnrBkVdgcICfcg==",
   "success": true,
   "projectFilePath": "C:\\Users\\pedro\\source\\academia-repos\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry\\ecommerce-masonry.csproj",
   "expectedPackageFiles": [
@@ -117,6 +117,8 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\pedro\\.nuget\\packages\\syncfusion.ej2.aspnet.core\\18.1.0.59\\syncfusion.ej2.aspnet.core.18.1.0.59.nupkg.sha512",
+    "C:\\Users\\pedro\\.nuget\\packages\\syncfusion.licensing\\18.1.0.59\\syncfusion.licensing.18.1.0.59.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

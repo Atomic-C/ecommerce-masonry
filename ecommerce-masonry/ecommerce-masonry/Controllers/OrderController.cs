@@ -1,9 +1,11 @@
 ﻿using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models.ViewModels;
+using Masonry_Utility;
 using Masonry_Utility.BrainTree;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +28,23 @@ namespace ecommerce_masonry.Controllers
         public OrderController(IOrderDetailRepository orderDetailRepo, IOrderHeaderRepository orderHeaderRepo, IBrainTreeGate brain)
         {
             //_db = db;
-            
+
             _orderDetailRepo = orderDetailRepo;
             _orderHeaderRepo = orderHeaderRepo;
             _brain = brain;
         }
         public IActionResult Index()
         {
-            return View();
-        }
+            OrderListViewModel orderListViewModel = new OrderListViewModel()
+            {
+                OrderHeaderList = _orderHeaderRepo.GetAll(),
+            StatusList = WebConstance.listStatus.ToList().Select(i => new SelectListItem
+            {
+                Text = i,
+                Value = i
+            })
+            };
+            return View(orderListViewModel);
     }
+}
 }

@@ -1,4 +1,8 @@
-﻿namespace Masonry_Utility
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Masonry_Utility
 {
     public static class WebConstance
     {
@@ -24,5 +28,12 @@
         public const string StatusShipped = "Shipped";
         public const string StatusCanceled = "Canceled";
         public const string StatusRefunded = "Refunded";
+
+        public static readonly IEnumerable<string> listStatus = new ReadOnlyCollection<string>(
+
+            new List<string>
+            {
+                StatusPending, StatusApproved, StatusInProcess, StatusShipped, StatusCanceled, StatusRefunded
+            });
     }
 }
