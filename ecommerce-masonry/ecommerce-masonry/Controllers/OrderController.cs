@@ -33,7 +33,7 @@ namespace ecommerce_masonry.Controllers
             _orderHeaderRepo = orderHeaderRepo;
             _brain = brain;
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchName = null, string searchEmail = null, string searchPhoneNumber = null, string Status = null)
         {
             OrderListViewModel orderListViewModel = new OrderListViewModel()
             {
@@ -44,6 +44,27 @@ namespace ecommerce_masonry.Controllers
                 Value = i
             })
             };
+
+            if (!string.IsNullOrEmpty(searchName)) // if it's not null & it's not empty...
+            {
+                orderListViewModel.OrderHeaderList = orderListViewModel.OrderHeaderList.Where(u=>u.FullName.ToLower().Contains(searchName.ToLower()));
+            }   
+            
+            if (!string.IsNullOrEmpty(searchEmail)) // if it's not null & it's not empty...
+            {
+                orderListViewModel.OrderHeaderList = orderListViewModel.OrderHeaderList.Where(u=>u.Email.ToLower().Contains(searchEmail.ToLower()));
+            } 
+            
+            if (!string.IsNullOrEmpty(searchPhoneNumber)) // if it's not null & it's not empty...
+            {
+                orderListViewModel.OrderHeaderList = orderListViewModel.OrderHeaderList.Where(u=>u.PhoneNumber.ToLower().Contains(searchPhoneNumber.ToLower()));
+            }     
+            
+            if (!string.IsNullOrEmpty(Status) && Status!= "--Order Status--") // if it's not null & it's not empty...
+            {
+                orderListViewModel.OrderHeaderList = orderListViewModel.OrderHeaderList.Where(u=>u.OrderStatus.ToLower().Contains(Status.ToLower()));
+            }
+
             return View(orderListViewModel);
     }
 }
