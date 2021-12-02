@@ -30,6 +30,8 @@
                                     </div>
                                     <div class="col-9">
                                         <input asp-for="@Model.ApplicationUser.FullUserName" type="text" class="form-control" />
+                                        @*<span asp-validation-for="@Model.ApplicationUser.FullUserName" class="text-danger"></span>*@
+
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -38,7 +40,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input asp-for="@Model.ApplicationUser.PhoneNumber" required type="text" class="form-control" />
-                                        <span asp-validation-for="@Model.ApplicationUser.PhoneNumber" class="text-danger"></span>
+                                        @*<span asp-validation-for="@Model.ApplicationUser.PhoneNumber" class="text-danger"></span>*@
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -47,7 +49,7 @@
                                     </div>
                                     <div class="col-9">
                                         <input asp-for="@Model.ApplicationUser.Email" required type="text" class="form-control" />
-                                        <span asp-validation-for="@Model.ApplicationUser.Email" class="text-danger"></span>
+                                        @*<span asp-validation-for="@Model.ApplicationUser.Email" class="text-danger"></span>*@
                                     </div>
                                 </div>
                                 @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
@@ -58,7 +60,7 @@
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.ApplicationUser.StreetAddress" type="text" class="form-control" />
-                                            <span asp-validation-for="@Model.ApplicationUser.StreetAddress" class="text-danger"></span>
+                                            @*<span asp-validation-for="@Model.ApplicationUser.StreetAddress" class="text-danger"></span>*@
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -67,7 +69,7 @@
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.ApplicationUser.City" type="text" class="form-control" />
-                                            <span asp-validation-for="@Model.ApplicationUser.City" class="text-danger"></span>
+                                            @*<span asp-validation-for="@Model.ApplicationUser.City" class="text-danger"></span>*@
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -76,7 +78,7 @@
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.ApplicationUser.State" type="text" class="form-control" />
-                                            <span asp-validation-for="@Model.ApplicationUser.State" class="text-danger"></span>
+                                            @*<span asp-validation-for="@Model.ApplicationUser.State" class="text-danger"></span>*@
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -85,7 +87,7 @@
                                         </div>
                                         <div class="col-9">
                                             <input asp-for="@Model.ApplicationUser.PostalCode" type="text" class="form-control" />
-                                            <span asp-validation-for="@Model.ApplicationUser.PostalCode" class="text-danger"></span>
+                                            @*<span asp-validation-for="@Model.ApplicationUser.PostalCode" class="text-danger"></span>*@
                                         </div>
                                     </div>
                                 }
@@ -157,6 +159,7 @@
                         {
                             <div class="col-12 col-md-5 offset-md-7">
                                 <button class="btn btn-success form-control" onclick="return validateInput()" id="submit-button">Submit Order</button>
+                                @* So here we invoke validateInput() through onclick method, so it posts if validateInput event is true *@
                             </div>
                         }
                         else
@@ -195,20 +198,79 @@
         });
 
         function validateInput() {
-            var app_name = document.getElementById("ApplicationUser_FullName").value; // this retrieves input type for fullname
-            var app_phone = document.getElementById("ApplicationUser_PhoneNumber").value; // this retrieves input type for phone number
-            var app_email = document.getElementById("ApplicationUser_Email").value; // this retrieves input type for email
-        }
+            var app_name = document.getElementById("ApplicationUser_FullUserName").value;
+            var app_phone = document.getElementById("ApplicationUser_PhoneNumber").value;
+            var app_email = document.getElementById("ApplicationUser_Email").value;
+            var app_sAddress = document.getElementById("ApplicationUser_StreetAddress").value;
+            var app_city = document.getElementById("ApplicationUser_City").value;
+            var app_state = document.getElementById("ApplicationUser_State").value;
+            var app_postalCode = document.getElementById("ApplicationUser_PostalCode").value;
+            //var app_cardNumber = document.getElementById("credit-card-number").value;
 
-        if (app_name.toString() == '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid Name',
-                text: 'Please insert name!',
-            })
-            return false;
+            if (app_name.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid name!',
+                    text: 'Please insert a valid name!',
+                })
+                return false;
+            }
+
+            if (app_phone.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Phone Number!',
+                    text: 'Please insert a valid Phone Number!',
+                })
+                return false;
+            }
+
+            if (app_email.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Email!',
+                    text: 'Please insert a valid Email!',
+                })
+                return false;
+            }
+
+            if (app_sAddress.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Street Address!',
+                    text: 'Please insert a valid Street Address!',
+                })
+                return false;
+            }
+
+            if (app_city.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid City!',
+                    text: 'Please insert a valid City!',
+                })
+                return false;
+            }
+
+            if (app_state.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid State!',
+                    text: 'Please insert a valid State!',
+                })
+                return false;
+            }
+
+            if (app_postalCode.toString() == '') { // if this string is empty...
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Postal Code!',
+                    text: 'Please insert a valid Postal Code!',
+                })
+                return false;
+            }
+            return true;
         }
-        return true;
 
     </script>
 
