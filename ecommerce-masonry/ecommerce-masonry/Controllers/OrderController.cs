@@ -21,6 +21,8 @@ namespace ecommerce_masonry.Controllers
         private readonly IOrderHeaderRepository _orderHeaderRepo;
         private readonly IBrainTreeGate _brain;
 
+        [BindProperty] // We're binding this property so when we post we do not have to retrive, it's there already
+        public OrderDetailsViewModel OrderDetailsViewModel { get; set; }
 
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IEmailSender _emailSender;
@@ -67,5 +69,15 @@ namespace ecommerce_masonry.Controllers
 
             return View(orderListViewModel);
     }
+        public IActionResult Details(int id)
+        {
+            OrderDetailsViewModel = new OrderDetailsViewModel
+            {
+                OrderHeader = _orderHeaderRepo.FirstOrDefault(u => u.Id == id),
+                OrderDetail = _orderDetailRepo.GetAll(o => o.OrderHeaderId == id, includeProperties: "Product"),
+
+            };
+            return View(OrderDetailsViewModel);
+        }
 }
 }
