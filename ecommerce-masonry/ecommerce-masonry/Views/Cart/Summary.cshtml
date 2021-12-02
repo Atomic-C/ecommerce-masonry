@@ -30,7 +30,6 @@
                                     </div>
                                     <div class="col-9">
                                         <input asp-for="@Model.ApplicationUser.FullUserName" type="text" class="form-control" />
-                                        <span asp-validation-for="@Model.ApplicationUser.FullUserName" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -157,13 +156,13 @@
                         @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
                         {
                             <div class="col-12 col-md-5 offset-md-7">
-                                <button class="btn btn-success form-control" id="submit-button">Submit Order</button>
+                                <button class="btn btn-success form-control" onclick="return validateInput()" id="submit-button">Submit Order</button>
                             </div>
                         }
                         else
                         {
                             <div class="col-12 col-md-5 offset-md-7">
-                                <button type="submit" class="btn btn-primary form-control">Submit Inquiry</button>
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Submit Inquiry</button>
                             </div>
                         }
                     </div>
@@ -194,6 +193,23 @@
                 });
             });
         });
+
+        function validateInput() {
+            var app_name = document.getElementById("ApplicationUser_FullName").value; // this retrieves input type for fullname
+            var app_phone = document.getElementById("ApplicationUser_PhoneNumber").value; // this retrieves input type for phone number
+            var app_email = document.getElementById("ApplicationUser_Email").value; // this retrieves input type for email
+        }
+
+        if (app_name.toString() == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Name',
+                text: 'Please insert name!',
+            })
+            return false;
+        }
+        return true;
+
     </script>
 
 
