@@ -130,30 +130,33 @@
                                 <span class="text-info">Order Summary</span>
                             </h4>
                             <ul class="list-group mb-3">
-
+                                @foreach (var item in Model.OrderDetail)
+                                {
                                 <li class="list-group-item d-flex justify-content-between p-2">
                                     <div class="row container">
                                         <div class="col-8">
-                                            <h6 class="my-0 text-info">Product.Name</h6>
-                                            <small class="text-muted">Price : PricePerSqFt</small><br />
-                                            <small class="text-muted">Quantity : Sqft</small>
+                                            @* Product is available here because we used eager loading in OrderController, we included "Product" *@
+                                            <h6 class="my-0 text-info">@item.Product.Name</h6>
+                                            <small class="text-muted">Price: @item.Product.Price</small><br />
+                                            <small class="text-muted">Quantity: @item.Product.TempSqft</small>
                                         </div>
                                         <div class="col-4">
-                                            <p class="text-success">PricePerSqFt * Sqft</p>
+                                            <p class="text-success">$@(item.Product.Price * @item.Product.TempSqft)</p>
                                         </div>
                                     </div>
                                 </li>
-
+                                }
                                 <li class="list-group-item bg-info">
                                     <div class="row container">
                                         <div class="col-6">
                                             <h5 class="text-white">TOTAL </h5>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <h5 class="text-white">FinalOrderTotal</h5>
+                                            <h5 class="text-white">@(Model.OrderHeader.FinalOrderTotal)</h5>
                                         </div>
                                     </div>
                                 </li>
+                                
                             </ul>
 
 
