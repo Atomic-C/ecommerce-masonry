@@ -152,7 +152,8 @@
                                             <h5 class="text-white">TOTAL </h5>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <h5 class="text-white">@(Model.OrderHeader.FinalOrderTotal)</h5>
+                                            <h5 class="text-white">$@(Model.OrderHeader.FinalOrderTotal)</h5>
+                                            @* TODO: Figure out why this displays ZERO. Where is this calculated? *@
                                         </div>
                                     </div>
                                 </li>
@@ -182,3 +183,17 @@
     </div>
 </form>
 
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+
+<script>
+    $(document).ready(function () {
+        var shippingDate = document.getElementById("shippingDate");
+
+        if (shippingDate.value == '1/01/0001') {
+            shippingDate.value = '';
+        }
+
+        })
+</script>
+}
