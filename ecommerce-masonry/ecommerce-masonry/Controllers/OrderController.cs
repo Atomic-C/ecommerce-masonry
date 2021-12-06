@@ -1,4 +1,5 @@
-﻿using Masonry_Data_Access.Repository.IRepository;
+﻿using Braintree;
+using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
@@ -106,8 +107,23 @@ namespace ecommerce_masonry.Controllers
         {
             OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
             orderHeader.OrderStatus = WebConstance.StatusInProcess;
-            _orderDetailRepo.Save();
 
+            var gateWay = _brain.GetGateWay();
+            Transaction transaction = gateWay.Transaction.Find(orderHeader.TransactionId);
+
+            if (transaction.Status == TransactionStatus.AUTHORIZED || transaction.Status == TransactionStatus.SUBMITTED_FOR_SETTLEMENT)
+            {
+                // no refund
+                Result<Transaction> resultvoid = gateWay.Transaction.Void(orderHeader.TransactionId); // This cancels or voids transaction  
+            }
+            else
+            {
+                // refund
+                Result<Transaction> resultvoid = gateWay.Transaction.Refund(orderHeader.TransactionId); // This provides a refund  
+            }
+            orderHeader.OrderStatus = WebConstance.StatusRefunded;
+            _orderDetailRepo.Save();
+            
             return RedirectToAction(nameof(Index));
         }
 }
