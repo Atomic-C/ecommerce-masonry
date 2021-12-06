@@ -141,7 +141,7 @@
                                             <small class="text-muted">Quantity: @item.Product.TempSqft</small>
                                         </div>
                                         <div class="col-4">
-                                            <p class="text-success">$@(item.Product.Price * @item.Product.TempSqft)</p>
+                                            <p class="text-success">$@(item.Product.Price * item.Product.TempSqft)</p>
                                         </div>
                                     </div>
                                 </li>
@@ -152,7 +152,7 @@
                                             <h5 class="text-white">TOTAL </h5>
                                         </div>
                                         <div class="col-6 text-right">
-                                            <h5 class="text-white">$@(Model.OrderHeader.FinalOrderTotal)</h5>
+                                            <h5 class="text-white">$(@Model.OrderHeader.FinalOrderTotal)</h5>
                                             @* TODO: Figure out why this displays ZERO. Where is this calculated? *@
                                         </div>
                                     </div>

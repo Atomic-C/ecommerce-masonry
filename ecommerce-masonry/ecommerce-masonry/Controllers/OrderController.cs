@@ -1,4 +1,5 @@
 ﻿using Masonry_Data_Access.Repository.IRepository;
+using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
 using Masonry_Utility.BrainTree;
@@ -78,6 +79,36 @@ namespace ecommerce_masonry.Controllers
 
             };
             return View(OrderDetailsViewModel);
+        }
+
+        [HttpPost]
+        public  IActionResult StartProcessing()
+        {
+            OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
+            orderHeader.OrderStatus = WebConstance.StatusInProcess;
+            _orderDetailRepo.Save();
+
+            return RedirectToAction(nameof(Index));
+        }       
+        
+        [HttpPost]
+        public IActionResult ShippedOrder()
+        {
+            OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
+            orderHeader.OrderStatus = WebConstance.StatusCanceled;
+            _orderDetailRepo.Save();
+
+            return RedirectToAction(nameof(Index));
+        }       
+        
+        [HttpPost]
+        public IActionResult CancelOrder()
+        {
+            OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
+            orderHeader.OrderStatus = WebConstance.StatusInProcess;
+            _orderDetailRepo.Save();
+
+            return RedirectToAction(nameof(Index));
         }
 }
 }
