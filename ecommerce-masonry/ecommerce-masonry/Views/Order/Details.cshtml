@@ -164,18 +164,19 @@
                             <br />
                             @if (Model.OrderHeader.OrderStatus == Masonry_Utility.WebConstance.StatusApproved)
                             {
-                                <input type="submit" value="Start Processing" class="btn btn-info form-control" />
+                                <input type="submit" value="Start Processing" formmethod="post" asp-action="StartProcessing" class="btn btn-info form-control" />
                             }
 
                             @if (Model.OrderHeader.OrderStatus == Masonry_Utility.WebConstance.StatusInProcess)
                             {
-                                <input type="submit" value="Ship Order" class="btn btn-primary form-control" />
+                                <input type="submit" value="Ship Order" formmethod="post" asp-action="ShippedOrder" class="btn btn-primary form-control" />
                             }
 
                             @if (Model.OrderHeader.OrderStatus != Masonry_Utility.WebConstance.StatusRefunded && Model.OrderHeader.OrderStatus != Masonry_Utility.WebConstance.StatusCanceled)
                             {
                                 <div class="pt-2">
                                     <button type="submit"
+                                            asp-action="CancelOrder"
                                             class="btn btn-danger form-control"
                                             formmethod="post">
                                         Cancel Order

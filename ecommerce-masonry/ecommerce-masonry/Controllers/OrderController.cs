@@ -96,7 +96,7 @@ namespace ecommerce_masonry.Controllers
         public IActionResult ShippedOrder()
         {
             OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
-            orderHeader.OrderStatus = WebConstance.StatusCanceled;
+            orderHeader.OrderStatus = WebConstance.StatusShipped;
             _orderDetailRepo.Save();
 
             return RedirectToAction(nameof(Index));
