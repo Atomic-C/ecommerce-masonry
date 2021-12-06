@@ -132,19 +132,19 @@
                             <ul class="list-group mb-3">
                                 @foreach (var item in Model.OrderDetail)
                                 {
-                                <li class="list-group-item d-flex justify-content-between p-2">
-                                    <div class="row container">
-                                        <div class="col-8">
-                                            @* Product is available here because we used eager loading in OrderController, we included "Product" *@
-                                            <h6 class="my-0 text-info">@item.Product.Name</h6>
-                                            <small class="text-muted">Price: @item.Product.Price</small><br />
-                                            <small class="text-muted">Quantity: @item.Product.TempSqft</small>
+                                    <li class="list-group-item d-flex justify-content-between p-2">
+                                        <div class="row container">
+                                            <div class="col-8">
+                                                @* Product is available here because we used eager loading in OrderController, we included "Product" *@
+                                                <h6 class="my-0 text-info">@item.Product.Name</h6>
+                                                <small class="text-muted">Price: @item.Product.Price</small><br />
+                                                <small class="text-muted">Quantity: @item.Product.TempSqft</small>
+                                            </div>
+                                            <div class="col-4">
+                                                <p class="text-success">$@(item.Product.Price * item.Product.TempSqft)</p>
+                                            </div>
                                         </div>
-                                        <div class="col-4">
-                                            <p class="text-success">$@(item.Product.Price * item.Product.TempSqft)</p>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 }
                                 <li class="list-group-item bg-info">
                                     <div class="row container">
@@ -157,24 +157,32 @@
                                         </div>
                                     </div>
                                 </li>
-                                
+
                             </ul>
 
 
                             <br />
+                            @if (Model.OrderHeader.OrderStatus == Masonry_Utility.WebConstance.StatusApproved)
+                            {
+                                <input type="submit" value="Start Processing" class="btn btn-info form-control" />
+                            }
 
-                            <input type="submit" value="Start Processing" class="btn btn-info form-control" />
+                            @if (Model.OrderHeader.OrderStatus == Masonry_Utility.WebConstance.StatusInProcess)
+                            {
+                                <input type="submit" value="Ship Order" class="btn btn-primary form-control" />
+                            }
 
-                            <input type="submit" value="Ship Order" class="btn btn-primary form-control" />
+                            @if (Model.OrderHeader.OrderStatus != Masonry_Utility.WebConstance.StatusRefunded && Model.OrderHeader.OrderStatus != Masonry_Utility.WebConstance.StatusCanceled)
+                            {
+                                <div class="pt-2">
+                                    <button type="submit"
+                                            class="btn btn-danger form-control"
+                                            formmethod="post">
+                                        Cancel Order
+                                    </button>
+                                </div>
+                            }
 
-
-                            <div class="pt-2">
-                                <button type="submit"
-                                        class="btn btn-danger form-control"
-                                        formmethod="post">
-                                    Cancel Order
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
