@@ -34,7 +34,7 @@ namespace Masonry_Models
         [ForeignKey("ApplicationTypeId")]
         public virtual ApplicationType ApplicationType { get; set; }
         [NotMapped] // We use NotMapped because we don't want to add this to the database and only use this property in our view!
-        [Range(1,10000)]
+        [Range(1,10000, ErrorMessage ="Square feet must be at least 1.")]
         public int TempSqft { get; set; }
     }
 }

@@ -14,7 +14,7 @@
                                 Shopping Cart
                             </div>
                             <div class="col-6 text-right">
-                                <a asp-action="RemoveAll" asp-controller="Home" class="btn btn-outline-warning btn-sm">Empty Cart(Why?)</a>
+                                @*<a asp-action="RemoveAll" asp-controller="Home" class="btn btn-outline-warning btn-sm">Empty Cart(Why?)</a>*@
                                 <a asp-action="RemoveAll" class="btn btn-outline-warning btn-sm">Empty Cart</a>
                                 <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
                             </div>
@@ -85,12 +85,13 @@
                             </div>
                             @if (User.IsInRole(Masonry_Utility.WebConstance.AdminRole))
                             {
-                                <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                    <input type="text" asp-for="@Model[i].TempSqft" class="form-control" />
-                                </div>
+                        <div class="col-4 col-lg-2 pt-lg-4" style="font-size:11px;">
+                            <input type="text" asp-for="@Model[i].TempSqft" class="form-control" />
+                            <span asp-validation-for="@Model[i].TempSqft" class="text-danger"></span>
+
+                        </div>
                                 <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
                                     <span style="font-size:17px;"> $@(Model[i].Price * Model[i].TempSqft)</span>
-
                                 </div>
                             }
                             <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
@@ -138,3 +139,7 @@ else
 	{
 	         <p>Please insert an item to the cart.</p>
 	}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
