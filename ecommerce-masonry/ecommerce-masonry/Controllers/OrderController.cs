@@ -4,6 +4,7 @@ using Masonry_Models;
 using Masonry_Models.ViewModels;
 using Masonry_Utility;
 using Masonry_Utility.BrainTree;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ecommerce_masonry.Controllers
-{
+{ 
+    [Authorize(Roles =WebConstance.AdminRole)]
     public class OrderController : Controller
     {
         //private readonly ApplicationDbContext _db;
