@@ -123,13 +123,15 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
                     {
                         if (!User.IsInRole(WebConstance.AdminRole)) // If user is not signed in, 
                         {
-                        await _signInManager.SignInAsync(user, isPersistent: false); // Sign him\her in. But how could this ever happen if admins can only be created by logged in admin?!?
+                            TempData[WebConstance.Success] = user.FullUserName + " has been registered!";
+                            return RedirectToAction("Index", "Home");
                         }
                         else
                         {
-                            return RedirectToAction("Index");
+                            await _signInManager.SignInAsync(user, isPersistent: false); // Sign him\her in. But how could this ever happen if admins can only be created by logged in admin?!?
+                            return LocalRedirect(returnUrl);
                         }
-                        return LocalRedirect(returnUrl);
+                        
                     }
                 }
                 foreach (var error in result.Errors)
