@@ -88,6 +88,7 @@ namespace ecommerce_masonry.Controllers
             OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
             orderHeader.OrderStatus = WebConstance.StatusInProcess;
             _orderDetailRepo.Save();
+            TempData[WebConstance.Success] = "Order is processing!";
 
             return RedirectToAction(nameof(Index));
         }       
@@ -97,7 +98,9 @@ namespace ecommerce_masonry.Controllers
         {
             OrderHeader orderHeader = _orderHeaderRepo.FirstOrDefault(u=>u.Id == OrderDetailsViewModel.OrderHeader.Id);
             orderHeader.OrderStatus = WebConstance.StatusShipped;
+            orderHeader.ShippingDate = DateTime.Now;
             _orderDetailRepo.Save();
+            TempData[WebConstance.Success] = "Order is shipped!";
 
             return RedirectToAction(nameof(Index));
         }       
@@ -123,8 +126,27 @@ namespace ecommerce_masonry.Controllers
             }
             orderHeader.OrderStatus = WebConstance.StatusRefunded;
             _orderDetailRepo.Save();
-            
+            TempData[WebConstance.Success] = "Order was canceled!";
+
             return RedirectToAction(nameof(Index));
         }
-}
+
+        [HttpPost]
+        public IActionResult UpdateOrderDetails()
+        {
+            OrderHeader orderHeaderFromDb = _orderHeaderRepo.FirstOrDefault(u => u.Id == OrderDetailsViewModel.OrderHeader.Id);
+
+            orderHeaderFromDb.FullName = OrderDetailsViewModel.OrderHeader.FullName;
+            orderHeaderFromDb.PhoneNumber = OrderDetailsViewModel.OrderHeader.PhoneNumber;
+            orderHeaderFromDb.StreetAddress = OrderDetailsViewModel.OrderHeader.StreetAddress;
+            orderHeaderFromDb.City = OrderDetailsViewModel.OrderHeader.City;
+            orderHeaderFromDb.State = OrderDetailsViewModel.OrderHeader.State;
+            orderHeaderFromDb.PostalCode = OrderDetailsViewModel.OrderHeader.PostalCode;
+            orderHeaderFromDb.Email = OrderDetailsViewModel.OrderHeader.Email;
+            _orderDetailRepo.Save();
+            TempData[WebConstance.Success] = "Order Details Updated Successfully!";
+
+            return RedirectToAction("Details", "Order", new { id=orderHeaderFromDb.Id });
+        }
+    }
 }
