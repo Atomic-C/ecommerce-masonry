@@ -1,4 +1,5 @@
 ﻿using Masonry_Data_Access;
+using Masonry_Data_Access.Initializer;
 using Masonry_Data_Access.Repository;
 using Masonry_Data_Access.Repository.IRepository;
 using Masonry_Utility;
@@ -58,9 +59,10 @@ namespace ecommerce_masonry
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IInquiryHeaderRepository, InquiryHeaderRepository>();
             services.AddScoped<IInquiryDetailsRepository, InquiryDetailsRepository>();
-            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
 
             services.AddAuthentication().AddFacebook(Options =>
             {
@@ -72,7 +74,7 @@ namespace ecommerce_masonry
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -90,6 +92,7 @@ namespace ecommerce_masonry
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            dbInitializer.Initialize(); // We are adding this to our pipeline!
             // Below we configure out session
             // By default only string and integer can be stored on .NETCORE. So we can add extension methods on session to configure this.
             app.UseSession();

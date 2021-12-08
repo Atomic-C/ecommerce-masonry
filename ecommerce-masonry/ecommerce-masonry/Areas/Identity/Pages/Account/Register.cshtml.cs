@@ -73,11 +73,11 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!await _roleManager.RoleExistsAsync(WebConstance.AdminRole))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(WebConstance.AdminRole));
-                await _roleManager.CreateAsync(new IdentityRole(WebConstance.CustomerRole));
-            }
+            //if (!await _roleManager.RoleExistsAsync(WebConstance.AdminRole))
+            //{
+            //    await _roleManager.CreateAsync(new IdentityRole(WebConstance.AdminRole));
+            //    await _roleManager.CreateAsync(new IdentityRole(WebConstance.CustomerRole));
+            //} // This section was moved to DbInitializer so we have our database seeded!
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -100,7 +100,7 @@ namespace ecommerce_masonry.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                    await _userManager.AddToRoleAsync(user, WebConstance.CustomerRole);
+                    await _userManager.AddToRoleAsync(user, WebConstance.CustomerRole); // While I don't seed db, change role to create admin
                     }
                     _logger.LogInformation("User created a new account with password.");
 
