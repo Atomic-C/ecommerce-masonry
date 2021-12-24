@@ -70,6 +70,7 @@ namespace ecommerce_masonry.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var files = HttpContext.Request.Form.Files; // Here we retrive our uploaded image
                 string webRootPath = _webHostEnvironment.WebRootPath; // This is our path to our www root folder. I don't get it. Don't we have a WebConstance class for this?
 
@@ -86,7 +87,7 @@ namespace ecommerce_masonry.Controllers
                     }
 
                     productViewModel.Product.Image = filename + extension; // Here we're storing the new guid name for file and extension. Not the path!!
-
+                    productViewModel.Product.ProdCounter = productViewModel.Product.ProdCounter + 1;
                     _prodRepo.Add(productViewModel.Product); // Here we add the product
                     TempData[WebConstance.Success] = "Successfully created!";
 
